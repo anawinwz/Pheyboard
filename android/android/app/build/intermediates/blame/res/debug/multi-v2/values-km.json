@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/coverleaf/learnReact-native/pheyboard/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-km/values-km.xml",
+            "outputFile": "/home/coverleaf/Desktop/softEng/android/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-km/values-km.xml",
             "map": [
                 {
                     "source": "/home/coverleaf/.gradle/caches/transforms-2/files-2.1/adecc18fb018798b4705b1f914c12033/res/values-km/values-km.xml",
