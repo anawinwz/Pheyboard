@@ -1,6 +1,11 @@
+//This class is for checking bluetooth adapter and turn off or turn on bluetooth untility
 package com.bridge;
 
 import android.bluetooth.BluetoothAdapter;
+import android.app.Activity;
+import android.bluetooth.BluetoothDevice;
+import android.content.Intent;
+import android.os.Bundle;
 
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -32,12 +37,29 @@ public class Checker extends ReactContextBaseJavaModule  {
             isOn = false;
         } else {
             isSup = true;
-            if (!mBluetoothAdapter.isEnabled()) {
-                // Bluetooth is not enable :)
-                isOn = false;
-            }else{
-                isOn =true;
-            }
+            isOn = mBluetoothAdapter.isEnabled();
+        }
+    }
+    //in case of unexpected close the interface
+    @ReactMethod
+    public void reCheck(){
+        //just return the status of bluetooth adapter
+        BluetoothAdapter blueAdap = BluetoothAdapter.getDefaultAdapter();
+        isOn = blueAdap.isEnabled();
+    }
+    //turn on or off the interface of the bluetooth
+    @ReactMethod
+    public void turnOn(){
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if(!mBluetoothAdapter.isEnabled()){
+            mBluetoothAdapter.enable();
+        }
+    }
+    @ReactMethod
+    public void turnOff(){
+        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if(mBluetoothAdapter.isEnabled()){
+            mBluetoothAdapter.disable();
         }
     }
     @Override
