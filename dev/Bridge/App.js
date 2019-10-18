@@ -75,6 +75,6 @@ export default class Bridge extends Component{
 const styles = StyleSheet.create({
   two_button:{
     flexDirection: 'row',
-    justifyContent:'space-between'
+    justifyContent:'space-evenly'
   }
 })
