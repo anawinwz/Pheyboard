@@ -44,8 +44,7 @@ public class Checker extends ReactContextBaseJavaModule  {
     @ReactMethod
     public void reCheck(){
         //just return the status of bluetooth adapter
-        BluetoothAdapter blueAdap = BluetoothAdapter.getDefaultAdapter();
-        isOn = blueAdap.isEnabled();
+        this.check();
     }
     //turn on or off the interface of the bluetooth
     @ReactMethod
