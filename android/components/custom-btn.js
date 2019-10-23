@@ -19,7 +19,9 @@ const styles = StyleSheet.create({
         width:100,     // change size of box here
         height:100,    // it have to be same as width if you want sqaure box
         borderRadius:10,// change how round the box
-        backgroundColor:"white"        
+        backgroundColor:"white",
+        display: "flex",
+        margin: 5    
     },
 
     text: {
