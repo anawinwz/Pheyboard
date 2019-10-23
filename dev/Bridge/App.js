@@ -6,6 +6,7 @@ export default class Bridge extends Component{
     this.state = {isOn:false,isSup:false,text:'',txtRecive:''}
     this.updateState();
   }
+  baseState = this.state;
   //********************************** custom function *****************************
 
   updateState = ()=> {
@@ -15,8 +16,12 @@ export default class Bridge extends Component{
   }
   buttonHandler = () => {
     //for send to the bluetooth in future
-    (this.state.text == '')? Alert.alert("You enter not thing can't send") : Alert.alert(this.state.text+' has been send');
-    this.setState({text:''});
+    //there is a bug when you clear the text so I intentionally change to the current code
+    //if someone know the way pls. do it
+    if(this.state.text != ''){
+      Alert.alert(this.state.text)
+      NativeModules.BluetoothUtil.logDeviceName((n)=>{console.log("There is(are) "+ n + "device(s) that paired")})
+    }
   }
   blueButtonHandler = ()=>{
     if(this.state.isOn){
