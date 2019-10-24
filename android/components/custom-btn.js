@@ -11,7 +11,7 @@ export const CustomButton = (props) => {
         </TouchableOpacity>
     );
 };
-const size_of_box = 85;//change size for your device here default is 100 for android emu
+const size_of_box = 100;//change size for your device here default is 100 for android emu
 const styles = StyleSheet.create({
     button: {
         justifyContent:"center",
