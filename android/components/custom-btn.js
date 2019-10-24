@@ -11,13 +11,13 @@ export const CustomButton = (props) => {
         </TouchableOpacity>
     );
 };
-
+const size_of_box = 85;//change size for your device here default is 100 for android emu
 const styles = StyleSheet.create({
     button: {
         justifyContent:"center",
         alignItems:"center",
-        width:100,     // change size of box here
-        height:100,    // it have to be same as width if you want sqaure box
+        width:size_of_box,     
+        height:size_of_box,    
         borderRadius:10,// change how round the box
         backgroundColor:"white",
         display: "flex",
