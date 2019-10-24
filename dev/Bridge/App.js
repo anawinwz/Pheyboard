@@ -3,7 +3,7 @@ import {StyleSheet,View,Text,TextInput,Button,Alert,NativeModules} from 'react-n
 export default class Bridge extends Component{
   constructor(props){
     super(props)
-    this.state = {isOn:false,isSup:false,text:'',txtRecive:''}
+    this.state = {isOn:false,isSup:false,text:'',txtRecive:'',devices:{},selectedDevice:null}
     this.updateState();
   }
   baseState = this.state;
@@ -12,6 +12,11 @@ export default class Bridge extends Component{
   updateState = ()=> {
     NativeModules.Checker.getStatus((err,isOn,isSup)=>{
       this.setState({isOn:isOn,isSup:isSup});
+      if(isOn) {
+        NativeModules.BluetoothUtil.getPairedDevices((data) => {
+          this.setState({devices: data})
+        })
+      }
     })
   }
   buttonHandler = () => {
@@ -19,12 +24,15 @@ export default class Bridge extends Component{
     //there is a bug when you clear the text so I intentionally change to the current code
     //if someone know the way pls. do it
     if(this.state.text != ''){
-      Alert.alert(this.state.text)
-      NativeModules.BluetoothUtil.logDeviceName((n)=>{console.log("There is(are) "+ n + "device(s) that paired")})
+      NativeModules.BluetoothUtil.sendMessage(this.state.text);
     }
   }
   blueButtonHandler = ()=>{
     if(this.state.isOn){
+      if (this.state.selectedDevice) {
+        NativeModules.BluetoothUtil.disconnectDevice(this.state.selectedDevice);
+        this.setState({selectedDevice: ''});
+      }
       NativeModules.Checker.turnOff();
       this.updateState();
     }
@@ -32,6 +40,13 @@ export default class Bridge extends Component{
       NativeModules.Checker.turnOn();
       this.updateState();
     }
+  }
+  selectDevice = (mac) => {
+    if (this.state.selectedDevice) {
+      NativeModules.BluetoothUtil.disconnectDevice(mac);
+    }
+    this.setState({selectedDevice: mac});
+    NativeModules.BluetoothUtil.connectDevice(mac);
   }
   //************************** react state function********************************
   //check on fire apps
@@ -73,6 +88,14 @@ export default class Bridge extends Component{
         </View>
         <Text>Recive msg</Text>
         <Text>{this.state.txtRecive}</Text>
+        <Text>Paired devices</Text>
+        {Object.keys(this.state.devices).map((mac) => 
+          <Button
+            key={mac}
+            title={`${mac} - ${this.state.devices[mac]}`}
+            onPress={() => this.selectDevice(mac)}
+            disabled={mac === this.state.selectedDevice ? true : false}
+          />)}
       </View>
     );
   }
