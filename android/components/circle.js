@@ -1,7 +1,6 @@
-//will change to touchable content in latter
 import React, { Component } from 'react';
 import { StyleSheet, View,TouchableHighlight,Image,Text} from 'react-native';
-import {CustomButton} from './custom-btn';
+
 
 export default class SemiCircle extends Component{
     constructor(props){

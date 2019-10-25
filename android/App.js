@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet,Text, View,Button,Alert,TouchableOpacity } from 'react-native';
 import Circle from './components/circle'
 import {CustomButton} from './components/custom-btn'
+import DeleteElements from './components/delete-element'
 export default class HelloWorldApp extends Component {
   state  = {int:0,isDel:false,selMem:-1}
   buttons = ['Copy','Paste',null,null,null,null,null,null,null,null,null,null]
@@ -14,14 +15,15 @@ export default class HelloWorldApp extends Component {
     return (
     <View style={styles.main_container}>
       <View style={styles.setting_container}>
-        <Circle onClick={this.delClickHandler} isDel={this.state.isDel}/>
+        {!this.state.isDel ? <Circle onClick={this.delClickHandler}/>:
+          <DeleteElements/>}
       </View>
-      <Text style={styles.pad_name}>{isDel ? this.headerText[1]:this.headerText[0]}</Text>
+      <Text style={styles.pad_name}>{this.state.isDel ? this.headerText[1]:this.headerText[0]}</Text>
       <View style={styles.key_pad_container}>
         {this.buttons.map((value, idx) => <CustomButton
         key={idx} 
         title={value}
-        onPress={()=>Alert.alert(value)}
+        onPress={()=>(value === null) ? null:Alert.alert(value)}
         style={(value === null) ? {backgroundColor: 'gray'} : null}
         textStyle={{}}
         disable={(value === null) ? true : false}
