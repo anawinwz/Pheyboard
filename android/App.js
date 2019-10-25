@@ -5,6 +5,7 @@ import {CustomButton} from './components/custom-btn'
 export default class HelloWorldApp extends Component {
   state  = {int:0,isDel:false,selMem:-1}
   buttons = ['Copy','Paste',null,null,null,null,null,null,null,null,null,null]
+  headerText = ['Sample Shortcut','Select button to delete']
   delClickHandler = () =>{
     this.setState({isDel: !this.state.isDel})
     console.log(this.state.isDel)
@@ -15,7 +16,7 @@ export default class HelloWorldApp extends Component {
       <View style={styles.setting_container}>
         <Circle onClick={this.delClickHandler} isDel={this.state.isDel}/>
       </View>
-      <Text style={styles.pad_name}>Sample Shortcut</Text>
+      <Text style={styles.pad_name}>{isDel ? this.headerText[1]:this.headerText[0]}</Text>
       <View style={styles.key_pad_container}>
         {this.buttons.map((value, idx) => <CustomButton
         key={idx} 
