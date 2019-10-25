@@ -35,11 +35,11 @@ const styles = StyleSheet.create({
   },
   pad_name:{color: 'white', fontSize:36, textAlign: 'center'},
   key_pad_container:{
-    flex:3,
+    flex:4,
     paddingLeft:10,
     flexDirection: 'row', 
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     flexWrap: 'wrap',
-    marginBottom: 20
+    marginBottom: 0
   }
 })

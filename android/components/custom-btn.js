@@ -21,9 +21,8 @@ const styles = StyleSheet.create({
         borderRadius:10,// change how round the box
         backgroundColor:"white",
         display: "flex",
-        margin: 5    
+        margin: 10
     },
-
     text: {
         fontSize: 16
     },
