@@ -3,10 +3,10 @@ import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 
 
 export const CustomButton = (props) => {
-    const { title = 'Enter', style = {}, textStyle = {}, onPress } = props;
+    const { title = 'Enter', style = {}, textStyle = {}, onPress, disable = false} = props;
 
     return (
-        <TouchableOpacity onPress={onPress} style={[styles.button, style]}>
+        <TouchableOpacity onPress={onPress} style={[styles.button, style]} disable = {props.disable}>
             <Text style={[styles.text, textStyle]}>{props.title}</Text>
         </TouchableOpacity>
     );
@@ -24,6 +24,6 @@ const styles = StyleSheet.create({
         margin: 10
     },
     text: {
-        fontSize: 16
+        fontSize: 20
     },
 });

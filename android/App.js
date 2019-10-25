@@ -19,6 +19,7 @@ export default class HelloWorldApp extends Component {
         onPress={()=>Alert.alert(value)}
         style={(value === null) ? {backgroundColor: 'gray'} : null}
         textStyle={{}}
+        disable={(value === null) ? true : false}
         />)}
       </View>
     </View>
