@@ -4,6 +4,9 @@ import { StyleSheet, View,TouchableHighlight,Image,Text} from 'react-native';
 import {CustomButton} from './custom-btn';
 
 export default class SemiCircle extends Component{
+    constructor(props){
+      super(props)
+    }
     state = {collapse:true};
     checkCollapse =() =>{
       this.state.collapse ? this.setState({collapse:false}):this.setState({collapse:true})
@@ -32,7 +35,7 @@ export default class SemiCircle extends Component{
                       <Text style={{fontSize:14, top:5}}>ADD</Text>
                     </View>                                                        
                   </TouchableHighlight>
-                  <TouchableHighlight underlayColor="white" style={styles.setting_button}>
+                  <TouchableHighlight onPress={this.props.onClick} underlayColor="white" style={styles.setting_button}>
                     <View style={styles.setting_button}>
                       <Image style={{width:50,height:50}} source={require('../assets/delete.png')}/>
                       <Text style={{fontSize:14, top:5}}>DELETE</Text>
