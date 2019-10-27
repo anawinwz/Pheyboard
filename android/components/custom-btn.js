@@ -1,14 +1,16 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { TouchableOpacity, StyleSheet, Text,View } from 'react-native';
 
 
 export const CustomButton = (props) => {
-    const { title = 'Enter', style = {}, textStyle = {}, onPress, disable = false} = props;
+    const { title = 'Enter', style = {}, textStyle = {}, onPress, disable = false,borderStyle={}} = props;
 
     return (
-        <TouchableOpacity onPress={onPress} style={[styles.button, style]} disable = {props.disable}>
-            <Text style={[styles.text, textStyle]}>{props.title}</Text>
-        </TouchableOpacity>
+        <View style={borderStyle}>
+            <TouchableOpacity onPress={onPress} style={[styles.button, style]} disable = {props.disable}>
+                <Text style={[styles.text, textStyle]}>{props.title}</Text>
+            </TouchableOpacity>            
+        </View>
     );
 };
 const size_of_box = 100;//change size for your device here default is 100 for android emu

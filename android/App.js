@@ -19,7 +19,7 @@ export default class HelloWorldApp extends Component {
   render() {
     return (
     <View style={styles.main_container}>
-      <DeletePage isDel={this.state.isDel} onPress = {this.delClickHandler} buttons={this.buttons} btnPress={this.setSelMem.bind(this)}/>
+      <DeletePage isDel={this.state.isDel} onPress = {this.delClickHandler} buttons={this.buttons} btnPress={this.setSelMem.bind(this)} sel={this.state.selMem}/>
       <View style={styles.setting_container}>
         <Circle onClick={this.delClickHandler}/>
       </View>
@@ -31,6 +31,7 @@ export default class HelloWorldApp extends Component {
         onPress={()=>(value === null) ? null:Alert.alert(value)}
         style={(value === null) ? {backgroundColor: 'gray'} : null}
         textStyle={{}}
+        borderStyle={{}}
         disable={(value === null) ? true : false}
         />)}
       </View>

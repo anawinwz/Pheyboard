@@ -23,8 +23,9 @@ export default class DeletePage extends Component{
                         key={idx} 
                         title={value}
                         onPress={(e)=>this.props.btnPress(this.props.buttons.indexOf(value))}
-                        style={(value === null) ? {backgroundColor: 'gray'} : {borderColor:'red'}}
+                        style={(value === null) ? {backgroundColor: 'gray'} : null}
                         textStyle={{}}
+                        borderStyle={(this.props.buttons[this.props.sel] === value && this.props.sel !== -1) ? {backgroundColor:'red'}:null}
                         disable={(value === null) ? true : false}
                         />)}
                     </View>
