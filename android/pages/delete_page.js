@@ -15,7 +15,7 @@ export default class DeletePage extends Component{
             >
                 <View style ={styles.modals_del}>
                     <View style={styles.del_setting_container}>
-                        <DeleteElements onPress ={this.props.onPress}/>
+                        <DeleteElements onPress ={this.props.onPress} onDel = {this.props.onDel}/>
                     </View>
                     <Text style={styles.head_text}>Select button to delete</Text>
                     <View style={styles.del_pad_container}>

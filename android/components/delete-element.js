@@ -14,7 +14,7 @@ export default class DeleteElements extends Component{
                             <Text style={{fontSize:14, top:5}}>Back</Text>
                         </View>
                     </TouchableHighlight>
-                    <TouchableHighlight style={styles.circle_left}>
+                    <TouchableHighlight style={styles.circle_left} onPress ={this.props.onDel}>
                         <View style={styles.button_content}>
                             <Image style={{width:50,height:50}} source={require('../assets/delete.png')}/>
                             <Text style={{fontSize:14, top:5}}>Delete</Text>
