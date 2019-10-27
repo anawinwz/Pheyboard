@@ -9,7 +9,7 @@ export default class DeletePage extends Component{
     render(){
         return(
             <Modal 
-                animationType = {'fade'}
+                animationType = {'none'}
                 transparent={false}
                 visible = {this.props.isDel}
             >
@@ -22,8 +22,8 @@ export default class DeletePage extends Component{
                         {this.props.buttons.map((value, idx) => <CustomButton
                         key={idx} 
                         title={value}
-                        onPress={()=>console.log(this.props.buttons.indexOf(value))}
-                        style={(value === null) ? {backgroundColor: 'gray'} : null}
+                        onPress={(e)=>this.props.btnPress(this.props.buttons.indexOf(value))}
+                        style={(value === null) ? {backgroundColor: 'gray'} : {borderColor:'red'}}
                         textStyle={{}}
                         disable={(value === null) ? true : false}
                         />)}

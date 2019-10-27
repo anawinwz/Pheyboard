@@ -7,14 +7,19 @@ export default class HelloWorldApp extends Component {
   state  = {int:0,isDel:false,selMem:-1}
   buttons = ['Copy','Paste',null,null,null,null,null,null,null,null,null,null]
   headerText = ['Sample Shortcut']
+  setSelMem(mem){
+    var idMem = this.state.selMem;
+    this.buttons[mem] !== null ? idMem = mem : idMem = -1;
+    console.log("the button is selected: "+idMem);
+    this.setState({selMem:idMem});
+  }
   delClickHandler = () =>{
     this.setState({isDel: !this.state.isDel})
-    console.log(this.state.isDel)
   }
   render() {
     return (
     <View style={styles.main_container}>
-      <DeletePage isDel={this.state.isDel} onPress = {this.delClickHandler} buttons={this.buttons}/>
+      <DeletePage isDel={this.state.isDel} onPress = {this.delClickHandler} buttons={this.buttons} btnPress={this.setSelMem.bind(this)}/>
       <View style={styles.setting_container}>
         <Circle onClick={this.delClickHandler}/>
       </View>
