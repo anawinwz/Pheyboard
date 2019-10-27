@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import {TouchableHighlight,Image,View,StyleSheet,Text} from 'react-native';
-import { isRequired } from 'react-native/Libraries/DeprecatedPropTypes/DeprecatedColorPropType';
 
 export default class DeleteElements extends Component{
     constructor(props){
@@ -9,13 +8,17 @@ export default class DeleteElements extends Component{
     render(){
         return(
             <View style={styles.delete_wrapper}>
-                    <TouchableHighlight style={styles.circle_right}>
-                        <View>
+                    <TouchableHighlight style={styles.circle_right} onPress ={this.props.onPress}>
+                        <View style={styles.button_content}>
                             <Image style={{width:50,height:50}} source={require('../assets/left.png')}/>
+                            <Text style={{fontSize:14, top:5}}>Back</Text>
                         </View>
                     </TouchableHighlight>
                     <TouchableHighlight style={styles.circle_left}>
-                        <Image style={{width:50,height:50}} source={require('../assets/delete.png')}/>
+                        <View style={styles.button_content}>
+                            <Image style={{width:50,height:50}} source={require('../assets/delete.png')}/>
+                            <Text style={{fontSize:14, top:5}}>Delete</Text>
+                        </View>
                     </TouchableHighlight>
             </View>
         )
@@ -44,5 +47,9 @@ const styles = StyleSheet.create({
         borderBottomRightRadius:200,
         borderTopRightRadius:200,
         backgroundColor:"white"
+    },
+    button_content:{
+        justifyContent:'center',
+        alignItems:"center"
     } 
 })

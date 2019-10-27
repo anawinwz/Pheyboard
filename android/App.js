@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { StyleSheet,Text, View,Button,Alert,TouchableOpacity } from 'react-native';
 import Circle from './components/circle'
 import {CustomButton} from './components/custom-btn'
-import DeleteElements from './components/delete-element'
+import DeletePage from './pages/delete_page'
 export default class HelloWorldApp extends Component {
   state  = {int:0,isDel:false,selMem:-1}
   buttons = ['Copy','Paste',null,null,null,null,null,null,null,null,null,null]
-  headerText = ['Sample Shortcut','Select button to delete']
+  headerText = ['Sample Shortcut']
   delClickHandler = () =>{
     this.setState({isDel: !this.state.isDel})
     console.log(this.state.isDel)
@@ -14,11 +14,11 @@ export default class HelloWorldApp extends Component {
   render() {
     return (
     <View style={styles.main_container}>
+      <DeletePage isDel={this.state.isDel} onPress = {this.delClickHandler} buttons={this.buttons}/>
       <View style={styles.setting_container}>
-        {!this.state.isDel ? <Circle onClick={this.delClickHandler}/>:
-          <DeleteElements/>}
+        <Circle onClick={this.delClickHandler}/>
       </View>
-      <Text style={styles.pad_name}>{this.state.isDel ? this.headerText[1]:this.headerText[0]}</Text>
+      <Text style={styles.pad_name}>{this.headerText[0]}</Text>
       <View style={styles.key_pad_container}>
         {this.buttons.map((value, idx) => <CustomButton
         key={idx} 
