@@ -4,7 +4,7 @@ import Circle from './components/circle'
 import {CustomButton} from './components/custom-btn'
 import DeletePage from './pages/delete_page'
 export default class HelloWorldApp extends Component {
-  state  = {int:0,isDel:false,selMem:-1}
+  state  = {int:0,isDel:false,selMem:-1,isPress:false}
   buttons = ['Copy','Paste',null,null,null,null,null,null,null,null,null,null]
   headerText = ['Sample Shortcut']
   //function listener from the delete page
@@ -21,7 +21,8 @@ export default class HelloWorldApp extends Component {
     if(this.state.selMem !== -1){
       //set the button to null
       this.buttons[this.state.selMem] = null;
-      console.log('it have to set to fucking null')
+      this.setState({isDel: !this.state.isDel})
+      this.setState({selMem:-1})
     }
   }
   render() {
