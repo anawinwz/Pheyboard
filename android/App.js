@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { StyleSheet,Text, View,Button,Alert,TouchableOpacity } from 'react-native';
-import Circle from './components/circle'
+import SettingBar from './components/setting_bar'
 import {CustomButton} from './components/custom-btn'
-import DeletePage from './pages/delete_page'
+import DeletePage from './pages/delete_btn_page'
+
 export default class HelloWorldApp extends Component {
-  state  = {int:0,isDel:false,selMem:-1,isPress:false}
-  buttons = ['Copy','Paste',null,null,null,null,null,null,null,null,null,null]
+  state  = {int:0, isDel:false, selMem:-1, isAdd:false}
+  buttons = ['Copy', 'Paste', null, null, null, null, null, null, null, null, null, null]
   headerText = ['Sample Shortcut']
   //function listener from the delete page
   setSelMem(mem){
@@ -14,8 +15,9 @@ export default class HelloWorldApp extends Component {
     console.log("the button is selected: "+idMem);
     this.setState({selMem:idMem});
   }
-  delClickHandler = () =>{
+  delPressHandler = () =>{
     this.setState({isDel: !this.state.isDel})
+    this.setState({selMem:-1})
   }
   delMember = () =>{
     if(this.state.selMem !== -1){
@@ -25,12 +27,22 @@ export default class HelloWorldApp extends Component {
       this.setState({selMem:-1})
     }
   }
+  addPressHandler = () =>{
+    this.setState({isAdd: !this.state.isAdd})
+  }
   render() {
     return (
     <View style={styles.main_container}>
-      <DeletePage isDel={this.state.isDel} onPress = {this.delClickHandler} buttons={this.buttons} btnPress={this.setSelMem.bind(this)} sel={this.state.selMem} onDel = {this.delMember}/>
+      <DeletePage 
+        isDel={this.state.isDel} 
+        onPress = {this.delPressHandler} 
+        buttons={this.buttons} 
+        btnPress={this.setSelMem.bind(this)} 
+        sel={this.state.selMem} 
+        onDel = {this.delMember}
+      />
       <View style={styles.setting_container}>
-        <Circle onClick={this.delClickHandler}/>
+        <SettingBar DelPress={this.delPressHandler} />
       </View>
       <Text style={styles.pad_name}>{this.headerText[0]}</Text>
       <View style={styles.key_pad_container}>
