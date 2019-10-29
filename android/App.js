@@ -2,23 +2,46 @@ import React, { Component } from 'react';
 import { StyleSheet,Text, View,Button,Alert,TouchableOpacity } from 'react-native';
 import Circle from './components/circle'
 import {CustomButton} from './components/custom-btn'
+import DeletePage from './pages/delete_page'
 export default class HelloWorldApp extends Component {
-  state  = {int:0}
+  state  = {int:0,isDel:false,selMem:-1,isPress:false}
   buttons = ['Copy','Paste',null,null,null,null,null,null,null,null,null,null]
+  headerText = ['Sample Shortcut']
+  //function listener from the delete page
+  setSelMem(mem){
+    var idMem = this.state.selMem;
+    this.buttons[mem] !== null ? idMem = mem : idMem = -1;
+    console.log("the button is selected: "+idMem);
+    this.setState({selMem:idMem});
+  }
+  delClickHandler = () =>{
+    this.setState({isDel: !this.state.isDel})
+  }
+  delMember = () =>{
+    if(this.state.selMem !== -1){
+      //set the button to null
+      this.buttons[this.state.selMem] = null;
+      this.setState({isDel: !this.state.isDel})
+      this.setState({selMem:-1})
+    }
+  }
   render() {
     return (
     <View style={styles.main_container}>
+      <DeletePage isDel={this.state.isDel} onPress = {this.delClickHandler} buttons={this.buttons} btnPress={this.setSelMem.bind(this)} sel={this.state.selMem} onDel = {this.delMember}/>
       <View style={styles.setting_container}>
-        <Circle/>
+        <Circle onClick={this.delClickHandler}/>
       </View>
-      <Text style={styles.pad_name}>Sample Shortcut</Text>
+      <Text style={styles.pad_name}>{this.headerText[0]}</Text>
       <View style={styles.key_pad_container}>
         {this.buttons.map((value, idx) => <CustomButton
         key={idx} 
         title={value}
-        onPress={()=>Alert.alert(value)}
+        onPress={()=>(value === null) ? null:Alert.alert(value)}
         style={(value === null) ? {backgroundColor: 'gray'} : null}
         textStyle={{}}
+        borderStyle={{}}
+        disable={(value === null) ? true : false}
         />)}
       </View>
     </View>
@@ -35,11 +58,11 @@ const styles = StyleSheet.create({
   },
   pad_name:{color: 'white', fontSize:36, textAlign: 'center'},
   key_pad_container:{
-    flex:3,
+    flex:4,
     paddingLeft:10,
     flexDirection: 'row', 
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     flexWrap: 'wrap',
-    marginBottom: 20
+    marginBottom: 0
   }
 })
