@@ -27,7 +27,7 @@ export default class CreatePage extends Component{
                     <View style={styles.tempButton}>
                         <CustomButton
                             title={this.state.tempName}
-                            onPress={{}}
+                            onPress={() => {}}
                             style={{backgroundColor: 'white'}}
                             textStyle={{}}
                             borderStyle={{}}
