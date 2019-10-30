@@ -13,6 +13,9 @@ export default class AddPage extends Component{
                 visible = {this.props.isAdd}
             >
                 <View style ={styles.modals_del}>
+                    <View style={styles.del_setting_container}>
+                        <DeleteSettingBar onPress ={this.props.onPress} onDel = {this.props.onDel}/>
+                    </View>
                     <Text style = {{color: 'white'}}>Add Pageeeeee</Text>
                 </View>
             </Modal>
@@ -22,6 +25,9 @@ export default class AddPage extends Component{
 const styles = StyleSheet.create({
     modals_del:{
         backgroundColor:"black",
+        flex:1
+    },
+    del_setting_container:{
         flex:1
     }
 })
