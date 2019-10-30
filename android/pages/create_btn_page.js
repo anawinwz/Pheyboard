@@ -39,6 +39,7 @@ export default class CreatePage extends Component{
                                 style={{height: 50}}
                                 onChangeText={(tempName) => this.setState({tempName})}
                                 value={this.state.tempName}
+                                maxLength={24}
                             />
                         </View>
                     </View>
