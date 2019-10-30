@@ -20,15 +20,13 @@ export default class HelloWorldApp extends Component {
     this.setState({selMem:idMem});
   }
   delPressHandler = () =>{
-    this.setState({isDel: !this.state.isDel})
-    this.setState({selMem:-1})
+    this.setState({isDel: !this.state.isDel, selMem:-1})
   }
   delMember = () =>{
     if(this.state.selMem !== -1){
       //set the button to null
       this.buttons[this.state.selMem] = null;
-      this.setState({isDel: !this.state.isDel})
-      this.setState({selMem:-1})
+      this.setState({isDel: !this.state.isDel, selMem:-1})
     }
   }
   createPressHandler = () =>{
@@ -36,13 +34,8 @@ export default class HelloWorldApp extends Component {
     this.temp_button.name = ''
   }
   addPressHandler = () =>{
-    if(this.state.isCre === true)
-    {
-      this.setState({isCre: !this.state.isCre})
-      this.setState({isAdd: !this.state.isAdd})
-    }
+    this.setState({isAdd: !this.state.isAdd, isCre: !this.state.isCre})
   }
-
   render() {
     return (
     <View style={styles.main_container}>
@@ -63,6 +56,7 @@ export default class HelloWorldApp extends Component {
       />
       <AddPage
         isAdd={this.state.isAdd}
+        onPress={this.addPressHandler} 
       />
       <View style={styles.setting_container}>
         <SettingBar CrePress={this.createPressHandler} DelPress={this.delPressHandler}/>
