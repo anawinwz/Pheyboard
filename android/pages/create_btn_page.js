@@ -34,14 +34,12 @@ export default class CreatePage extends Component{
                             disable={true}
                         />
                         <Text style={styles.button_name}>Button Name</Text>
-                        <View style={styles.name_input_box}>
-                            <TextInput
-                                style={{height: 50}}
-                                onChangeText={(tempName) => this.setState({tempName})}
-                                value={this.state.tempName}
-                                maxLength={24}
-                            />
-                        </View>
+                        <TextInput
+                            style={styles.name_input_box}
+                            onChangeText={(tempName) => this.setState({tempName})}
+                            value={this.state.tempName}
+                            maxLength={24}
+                        />
                     </View>
                     <View style={styles.createButton_area}>
                         <TouchableHighlight underlayColor="white" style={styles.createButton}>
@@ -94,8 +92,7 @@ const styles = StyleSheet.create({
         alignItems:"center"
     },
     name_input_box:{
-        justifyContent:"center",
-        alignItems:"center",
+        textAlign:"center",
         width:300,     
         height:40,    
         borderRadius:10,
