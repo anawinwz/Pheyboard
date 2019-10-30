@@ -42,7 +42,7 @@ export default class CreatePage extends Component{
                         />
                     </View>
                     <View style={styles.createButton_area}>
-                        <TouchableHighlight underlayColor="white" style={styles.createButton}>
+                        <TouchableHighlight underlayColor="white" style={styles.createButton} onPress={this.props.onAdd}>
                             <Text style={styles.button_name}>Create Button</Text>
                         </TouchableHighlight>
                     </View>
