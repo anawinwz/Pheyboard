@@ -8,13 +8,13 @@ export default class DeleteElements extends Component{
     render(){
         return(
             <View style={styles.delete_wrapper}>
-                    <TouchableHighlight style={styles.circle_right} onPress ={this.props.onPress}>
+                    <TouchableHighlight underlayColor="white" style={styles.circle_right} onPress ={this.props.onPress}>
                         <View style={styles.button_content}>
                             <Image style={{width:50,height:50}} source={require('../assets/left.png')}/>
                             <Text style={{fontSize:14, top:5}}>Back</Text>
                         </View>
                     </TouchableHighlight>
-                    <TouchableHighlight style={styles.circle_left} onPress ={this.props.onDel}>
+                    <TouchableHighlight underlayColor="white" style={styles.circle_left} onPress ={this.props.onDel}>
                         <View style={styles.button_content}>
                             <Image style={{width:50,height:50}} source={require('../assets/delete.png')}/>
                             <Text style={{fontSize:14, top:5}}>Delete</Text>

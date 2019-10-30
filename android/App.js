@@ -3,11 +3,14 @@ import { StyleSheet,Text, View,Button,Alert,TouchableOpacity } from 'react-nativ
 import SettingBar from './components/setting_bar'
 import {CustomButton} from './components/custom-btn'
 import DeletePage from './pages/delete_btn_page'
+import CreatePage from './pages/create_btn_page'
 
 export default class HelloWorldApp extends Component {
   state  = {int:0, isDel:false, selMem:-1, isAdd:false}
   buttons = ['Copy', 'Paste', null, null, null, null, null, null, null, null, null, null]
   headerText = ['Sample Shortcut']
+  temp_button = {name:null, Input1:null, Input2:null, Input3:null, Input4:null}
+
   //function listener from the delete page
   setSelMem(mem){
     var idMem = this.state.selMem;
@@ -30,19 +33,25 @@ export default class HelloWorldApp extends Component {
   addPressHandler = () =>{
     this.setState({isAdd: !this.state.isAdd})
   }
+
   render() {
     return (
     <View style={styles.main_container}>
       <DeletePage 
         isDel={this.state.isDel} 
-        onPress = {this.delPressHandler} 
+        onPress={this.delPressHandler} 
         buttons={this.buttons} 
         btnPress={this.setSelMem.bind(this)} 
         sel={this.state.selMem} 
-        onDel = {this.delMember}
+        onDel={this.delMember}
+      />
+      <CreatePage 
+        isAdd={this.state.isAdd} 
+        onPress={this.addPressHandler} 
+        buttons={this.buttons} 
       />
       <View style={styles.setting_container}>
-        <SettingBar DelPress={this.delPressHandler} />
+        <SettingBar AddPress={this.addPressHandler} DelPress={this.delPressHandler}/>
       </View>
       <Text style={styles.pad_name}>{this.headerText[0]}</Text>
       <View style={styles.key_pad_container}>
