@@ -5,14 +5,14 @@ import {CustomButton} from '../components/custom-btn'
 export default class CreatePage extends Component{
     constructor(props){
         super(props)
-        this.state = {tempName: ''};
+        this.state = {tempName: this.props.tempName};
     }
     render(){
         return(
             <Modal 
                     animationType = {'none'}
                     transparent={false}
-                    visible = {this.props.isAdd}
+                    visible = {this.props.isCre}
             >
                 <View style ={styles.modals_create}>
                     <View style={styles.create_wrapper}>
@@ -43,6 +43,11 @@ export default class CreatePage extends Component{
                             />
                         </View>
                     </View>
+                    <View style={styles.createButton_area}>
+                        <TouchableHighlight underlayColor="white" style={styles.createButton}>
+                            <Text style={styles.button_name}>Create Button</Text>
+                        </TouchableHighlight>
+                    </View>
                 </View>
             </Modal>
         )
@@ -59,6 +64,17 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         paddingTop:15,
     },
+    tempButton:{
+        flex:5,
+        flexDirection:"column",
+        justifyContent:"flex-start",
+        alignItems:"center"
+    },
+    createButton_area:{
+        flex:1,
+        justifyContent:"flex-start",
+        alignItems:"center"
+    },
     circle:{
         justifyContent:"center",
         alignItems:"center",
@@ -68,15 +84,9 @@ const styles = StyleSheet.create({
         borderTopRightRadius:200,
         backgroundColor:"white"
     },
-    tempButton:{
-        flex:5,
-        flexDirection:"column",
-        justifyContent:"flex-start",
-        alignItems:"center"
-    },
     button_name:{
         color: 'white', 
-        fontSize:30, 
+        fontSize:25, 
         textAlign: 'center'
     },
     button_content:{
@@ -86,11 +96,19 @@ const styles = StyleSheet.create({
     name_input_box:{
         justifyContent:"center",
         alignItems:"center",
-        width:330,     
+        width:300,     
         height:40,    
         borderRadius:10,
         backgroundColor:"white",
         display: "flex",
         margin: 10
+    },
+    createButton:{
+        justifyContent:"center",
+        alignItems:"center",
+        width:330,     
+        height:50,    
+        borderRadius:10,
+        backgroundColor:"green",
     }
 })

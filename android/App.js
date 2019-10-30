@@ -4,12 +4,13 @@ import SettingBar from './components/setting_bar'
 import {CustomButton} from './components/custom-btn'
 import DeletePage from './pages/delete_btn_page'
 import CreatePage from './pages/create_btn_page'
+import AddPage from './pages/add_btn_page'
 
 export default class HelloWorldApp extends Component {
-  state  = {int:0, isDel:false, selMem:-1, isAdd:false}
+  state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false}
   buttons = ['Copy', 'Paste', null, null, null, null, null, null, null, null, null, null]
   headerText = ['Sample Shortcut']
-  temp_button = {name:null, Input1:null, Input2:null, Input3:null, Input4:null}
+  temp_button = {name:'', Input1:null, Input2:null, Input3:null, Input4:null}
 
   //function listener from the delete page
   setSelMem(mem){
@@ -30,8 +31,16 @@ export default class HelloWorldApp extends Component {
       this.setState({selMem:-1})
     }
   }
+  createPressHandler = () =>{
+    this.setState({isCre: !this.state.isCre})
+    this.temp_button.name = ''
+  }
   addPressHandler = () =>{
-    this.setState({isAdd: !this.state.isAdd})
+    if(this.state.isCre === true)
+    {
+      this.setState({isCre: !this.state.isCre})
+      this.setState({isAdd: !this.state.isAdd})
+    }
   }
 
   render() {
@@ -46,12 +55,17 @@ export default class HelloWorldApp extends Component {
         onDel={this.delMember}
       />
       <CreatePage 
-        isAdd={this.state.isAdd} 
-        onPress={this.addPressHandler} 
+        isCre={this.state.isCre} 
+        onPress={this.createPressHandler} 
         buttons={this.buttons} 
+        tempName={this.temp_button.name}
+        onAdd={this.addPressHandler}
+      />
+      <AddPage
+        isAdd={this.state.isAdd}
       />
       <View style={styles.setting_container}>
-        <SettingBar AddPress={this.addPressHandler} DelPress={this.delPressHandler}/>
+        <SettingBar CrePress={this.createPressHandler} DelPress={this.delPressHandler}/>
       </View>
       <Text style={styles.pad_name}>{this.headerText[0]}</Text>
       <View style={styles.key_pad_container}>

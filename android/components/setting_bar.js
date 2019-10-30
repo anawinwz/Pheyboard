@@ -28,7 +28,7 @@ export default class SemiCircle extends Component{
                       <Text style={{fontSize:14, top:5}}>BACK</Text>
                     </View>                    
                   </TouchableHighlight>
-                  <TouchableHighlight onPress={this.props.AddPress} underlayColor="white" style={styles.setting_button}>
+                  <TouchableHighlight onPress={this.props.CrePress} underlayColor="white" style={styles.setting_button}>
                     <View style={styles.setting_button}>
                       <Image style={{width:50,height:50}} source={require('../assets/add.png')}/>
                       <Text style={{fontSize:14, top:5}}>ADD</Text>
