@@ -1,11 +1,20 @@
 import React,{Component} from 'react'
 import {TouchableHighlight,Image,Modal,StyleSheet,Text,TextInput,View} from 'react-native'
 import {CustomButton} from '../components/custom-btn'
+import {BackButton} from '../components/back_button'
 
 export default class CreatePage extends Component{
     constructor(props){
         super(props)
-        this.state = {tempName: this.props.tempName};
+        this.state = {
+            tempName: this.props.tempName,
+            modalVisible: !this.props.isCre
+        };
+    }
+    backHandler = ()=>{
+        this.setState({tempName:""})
+        this.props.onPress()
+        console.log(this.state.tempName)
     }
     render(){
         return(
@@ -16,23 +25,12 @@ export default class CreatePage extends Component{
             >
                 <View style ={styles.modals_create}>
                     <View style={styles.create_wrapper}>
-                        <TouchableHighlight underlayColor="white" style={styles.circle} onPress={this.props.onPress}>
-                            <View style={styles.button_content}>
-                                <Image style={{width:50,height:50}} source={require('../assets/left.png')}/>
-                                <Text style={{fontSize:14, top:5}}>Back</Text>
-                             </View>
-                        </TouchableHighlight>
-                        
+                        <BackButton onClick={this.backHandler}/>                        
                     </View>
                     <View style={styles.tempButton}>
-                        <CustomButton
-                            title={this.state.tempName}
-                            onPress={() => {}}
-                            style={{backgroundColor: 'white'}}
-                            textStyle={{}}
-                            borderStyle={{}}
-                            disable={true}
-                        />
+                        <View style={styles.preview}>
+                            <Text>{this.state.tempName}</Text>
+                        </View>
                         <Text style={styles.button_name}>Button Name</Text>
                         <TextInput
                             style={styles.name_input_box}
@@ -107,5 +105,15 @@ const styles = StyleSheet.create({
         height:50,    
         borderRadius:10,
         backgroundColor:"green",
+    },
+    preview:{
+        justifyContent:"center",
+        alignItems:"center",
+        width:100,     
+        height:100,    
+        borderRadius:10,// change how round the box
+        backgroundColor:"white",
+        display: "flex",
+        margin: 10
     }
 })

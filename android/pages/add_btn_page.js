@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
-import {Modal,StyleSheet,Text,View} from 'react-native'
-import DeleteSettingBar from '../components/delete_setting_bar'
+import {Modal,StyleSheet,Text,View,Alert} from 'react-native'
+import AddSettingBar from '../components/add_setting_bar'
 export default class AddPage extends Component{
     constructor(props){
         super(props)
@@ -14,9 +14,9 @@ export default class AddPage extends Component{
             >
                 <View style ={styles.modals_del}>
                     <View style={styles.del_setting_container}>
-                        <DeleteSettingBar onPress ={this.props.onPress} onDel = {this.props.onDel}/>
+                        <AddSettingBar onPress ={this.props.onPress} onAdd = {this.props.onDel}/>
                     </View>
-                    <Text style = {{color: 'white'}}>Add Pageeeeee</Text>
+                    
                 </View>
             </Modal>
         )
