@@ -16,6 +16,10 @@ export default class CreatePage extends Component{
         this.props.onPress()
         console.log(this.state.tempName)
     }
+    BindTempName = ()=>{
+        this.props.onAdd()
+        this.props.btnPress(this.state.tempName)
+    }
     render(){
         return(
             <Modal 
@@ -40,7 +44,7 @@ export default class CreatePage extends Component{
                         />
                     </View>
                     <View style={styles.createButton_area}>
-                        <TouchableHighlight underlayColor="white" style={styles.createButton} onPress={this.props.onAdd}>
+                        <TouchableHighlight underlayColor="white" style={styles.createButton} onPress={this.BindTempName}>
                             <Text style={styles.button_name}>Create Button</Text>
                         </TouchableHighlight>
                     </View>

@@ -14,9 +14,8 @@ export default class AddPage extends Component{
             >
                 <View style ={styles.modals_del}>
                     <View style={styles.del_setting_container}>
-                        <AddSettingBar onPress ={this.props.onPress} onAdd = {this.props.onDel}/>
+                        <AddSettingBar onPress ={this.props.onPress} onAdd = {this.props.onDel} tempName={this.props.tempName}/>
                     </View>
-                    
                 </View>
             </Modal>
         )

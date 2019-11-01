@@ -19,6 +19,9 @@ export default class HelloWorldApp extends Component {
     console.log("the button is selected: "+idMem);
     this.setState({selMem:idMem});
   }
+  BindTempName(returnName){
+    this.temp_button.name = returnName;
+  }
   delPressHandler = () =>{
     this.setState({isDel: !this.state.isDel, selMem:-1})
   }
@@ -53,10 +56,12 @@ export default class HelloWorldApp extends Component {
         buttons={this.buttons} 
         tempName={this.temp_button.name}
         onAdd={this.addPressHandler}
+        btnPress={this.BindTempName.bind(this)}
       />
       <AddPage
         isAdd={this.state.isAdd}
         onPress={this.addPressHandler} 
+        tempName={this.temp_button.name}
       />
       <View style={styles.setting_container}>
         <SettingBar CrePress={this.createPressHandler} DelPress={this.delPressHandler}/>
