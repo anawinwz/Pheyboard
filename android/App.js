@@ -19,6 +19,7 @@ export default class HelloWorldApp extends Component {
     console.log("the button is selected: "+idMem);
     this.setState({selMem:idMem});
   }
+  //find what button is selected
   addMem(mem){
     var idMem = this.state.selMem;
     this.buttons[mem] === null ? idMem = mem : idMem = -1;
@@ -36,6 +37,15 @@ export default class HelloWorldApp extends Component {
       //set the button to null
       this.buttons[this.state.selMem] = null;
       this.setState({isDel: !this.state.isDel, selMem:-1})
+    }
+  }
+  addMemberHandler = () =>{
+    if(this.state.addMem !== -1 && this.temp_button.name !== ''){
+      this.buttons[this.state.addMem] = this.temp_button.name
+      this.temp_button.name='';
+      this.setState({isAdd: !this.state.isAdd,addMem:-1})
+      console.log("new member is added to arr")
+      console.log(this.buttons)
     }
   }
   createPressHandler = () =>{
@@ -71,6 +81,7 @@ export default class HelloWorldApp extends Component {
         buttons={this.buttons}
         onAdd={this.addMem.bind(this)}
         sel = {this.state.addMem}
+        confirm={this.addMemberHandler}
       />
       <View style={styles.setting_container}>
         <SettingBar CrePress={this.createPressHandler} DelPress={this.delPressHandler}/>

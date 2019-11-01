@@ -17,7 +17,7 @@ export default class AddElements extends Component{
                     <View style={styles.button}>
                         <Text style={styles.text}>{this.props.tempName}</Text>
                     </View>
-                    <TouchableHighlight underlayColor="white" style={styles.circle_left} onPress ={{}}>
+                    <TouchableHighlight underlayColor="white" style={styles.circle_left} onPress ={this.props.onClick}>
                         <View style={styles.button_content}>
                             <Image style={{width:50,height:50}} source={require('../assets/add.png')}/>
                             <Text style={{fontSize:14, top:5}}>Add Button</Text>

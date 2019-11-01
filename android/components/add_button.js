@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, Text,View } from 'react-native';
+import { TouchableHighlight, StyleSheet, Text,View,Image } from 'react-native';
 
 
 export const AddButton = (props) => {
@@ -8,9 +8,11 @@ export const AddButton = (props) => {
     return (
         <View style={borderStyle}>
             {(numReg.test(props.title)) ? 
-                <TouchableOpacity onPress={onPress} style={[styles.button, style]} disable = {props.disable}>
-                    <Text style={[styles.text, textStyle]}>test</Text>
-                </TouchableOpacity>:
+                <TouchableHighlight onPress={onPress} style={[styles.button, style]} disable = {props.disable}>
+                    <View style={styles.button_content}>
+                        <Image style={{width:50,height:50}} source={require('../assets/plus.png')}/>
+                    </View>
+                </TouchableHighlight>:
                 <View style={[styles.button,style]} >
                     <Text>{props.title}</Text>
                 </View>
@@ -34,4 +36,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: "center"
     },
+    button_content:{
+        justifyContent:'center',
+        alignItems:"center"
+    } 
 });
