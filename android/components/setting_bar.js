@@ -40,7 +40,7 @@ export default class SemiCircle extends Component{
                       <Text style={{fontSize:14, top:5}}>DELETE</Text>
                     </View>                                                        
                   </TouchableHighlight>
-                  <TouchableHighlight underlayColor="white" style={styles.setting_button}>
+                  <TouchableHighlight onPress={this.props.ChangePress} underlayColor="white" style={styles.setting_button}>
                     <View style={styles.setting_button}>
                       <Image style={{width:50,height:50}} source={require('../assets/sets.png')}/>
                       <Text style={{fontSize:14, top:5}}>CHANGE</Text>
