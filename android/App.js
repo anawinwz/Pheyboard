@@ -5,6 +5,7 @@ import {CustomButton} from './components/custom-btn'
 import DeletePage from './pages/delete_btn_page'
 import CreatePage from './pages/create_btn_page'
 import AddPage from './pages/add_btn_page'
+import ChangePage from './pages/change_set_page'
 
 export default class HelloWorldApp extends Component {
   state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1}
@@ -55,6 +56,9 @@ export default class HelloWorldApp extends Component {
   addPressHandler = () =>{
     this.setState({isAdd: !this.state.isAdd, isCre: !this.state.isCre})
   }
+  changePressHandler = () =>{
+    this.setState({isChange: !this.state.isChange})
+  }
   render() {
     return (
     <View style={styles.main_container}>
@@ -83,8 +87,16 @@ export default class HelloWorldApp extends Component {
         sel = {this.state.addMem}
         confirm={this.addMemberHandler}
       />
+      <ChangePage
+        isChange={this.state.isChange}
+        onPress={this.changePressHandler} 
+      />
       <View style={styles.setting_container}>
-        <SettingBar CrePress={this.createPressHandler} DelPress={this.delPressHandler}/>
+        <SettingBar 
+          CrePress={this.createPressHandler} 
+          DelPress={this.delPressHandler} 
+          ChangePress={this.changePressHandler}
+        />      
       </View>
       <Text style={styles.pad_name}>{this.headerText[0]}</Text>
       <View style={styles.key_pad_container}>
