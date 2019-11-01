@@ -7,7 +7,7 @@ import CreatePage from './pages/create_btn_page'
 import AddPage from './pages/add_btn_page'
 
 export default class HelloWorldApp extends Component {
-  state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false}
+  state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1}
   buttons = ['Copy', 'Paste', null, null, null, null, null, null, null, null, null, null]
   headerText = ['Sample Shortcut']
   temp_button = {name:'', Input1:null, Input2:null, Input3:null, Input4:null}
@@ -18,6 +18,12 @@ export default class HelloWorldApp extends Component {
     this.buttons[mem] !== null ? idMem = mem : idMem = -1;
     console.log("the button is selected: "+idMem);
     this.setState({selMem:idMem});
+  }
+  addMem(mem){
+    var idMem = this.state.selMem;
+    this.buttons[mem] === null ? idMem = mem : idMem = -1;
+    console.log("the button is selected: "+idMem);
+    this.setState({addMem:idMem});
   }
   BindTempName(returnName){
     this.temp_button.name = returnName;
@@ -62,6 +68,9 @@ export default class HelloWorldApp extends Component {
         isAdd={this.state.isAdd}
         onPress={this.addPressHandler} 
         tempName={this.temp_button.name}
+        buttons={this.buttons}
+        onAdd={this.addMem.bind(this)}
+        sel = {this.state.addMem}
       />
       <View style={styles.setting_container}>
         <SettingBar CrePress={this.createPressHandler} DelPress={this.delPressHandler}/>
