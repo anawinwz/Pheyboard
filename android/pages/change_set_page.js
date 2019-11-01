@@ -18,35 +18,53 @@ export default class DeletePage extends Component{
                     </View>
                     <Text style = {styles.head_text}>Select set</Text>
                     <View style = {styles.pad_sets_container}>
-                        
-
                         <TouchableHighlight underlayColor="white" style={styles.set_member}>
                             <View style={styles.set_member}>
                                 <View style={styles.circle}/>
-                                <Text style={styles.set_name}>DESPACITO</Text>
+                                <Text style={styles.set_name}>Sample Shortcut</Text>
                             </View>
                         </TouchableHighlight>
-
                         <TouchableHighlight underlayColor="white" style={styles.set_member}>
-                            <Text style={styles.set_name}>DESPACITO2</Text>
+                            <View style={styles.set_member}>
+                                <View style={styles.circle}/>
+                                <Text style={styles.set_name}>Untitled set 2</Text>
+                            </View>
                         </TouchableHighlight>
                         <TouchableHighlight underlayColor="white" style={styles.set_member}>
-                            <Text style={styles.set_name}>DESPACITO3</Text>
+                            <View style={styles.set_member}>
+                                <View style={styles.circle}/>
+                                <Text style={styles.set_name}>Untitled set 3</Text>
+                            </View>
                         </TouchableHighlight>
                         <TouchableHighlight underlayColor="white" style={styles.set_member}>
-                            <Text style={styles.set_name}>DESPACITO4</Text>
+                            <View style={styles.set_member}>
+                                <View style={styles.circle}/>
+                                <Text style={styles.set_name}>Untitled set 4</Text>
+                            </View>
                         </TouchableHighlight>
                         <TouchableHighlight underlayColor="white" style={styles.set_member}>
-                            <Text style={styles.set_name}>DESPACITO5</Text>
+                            <View style={styles.set_member}>
+                                <View style={styles.circle}/>
+                                <Text style={styles.set_name}>Untitled set 5</Text>
+                            </View>
                         </TouchableHighlight>
                         <TouchableHighlight underlayColor="white" style={styles.set_member}>
-                            <Text style={styles.set_name}>DESPACITO6</Text>
+                            <View style={styles.set_member}>
+                                <View style={styles.circle}/>
+                                <Text style={styles.set_name}>Untitled set 6</Text>
+                            </View>
                         </TouchableHighlight>
                         <TouchableHighlight underlayColor="white" style={styles.set_member}>
-                            <Text style={styles.set_name}>DESPACITO7</Text>
+                            <View style={styles.set_member}>
+                                <View style={styles.circle}/>
+                                <Text style={styles.set_name}>Untitled set 7</Text>
+                            </View>
                         </TouchableHighlight>
                         <TouchableHighlight underlayColor="white" style={styles.set_member}>
-                            <Text style={styles.set_name}>DESPACITO8</Text>
+                            <View style={styles.set_member}>
+                                <View style={styles.circle}/>
+                                <Text style={styles.set_name}>Untitled set 8</Text>
+                            </View>
                         </TouchableHighlight>
                     </View>
                 </View>
