@@ -19,14 +19,14 @@ export default class DeletePage extends Component{
                     </View>
                     <Text style={styles.head_text}>Select button to delete</Text>
                     <View style={styles.del_pad_container}>
-                        {this.props.buttons.map((value, idx) => <CustomButton
+                        {this.props.buttons.map((button, idx) => <CustomButton
                         key={idx} 
-                        title={value}
-                        onPress={(e)=>this.props.btnPress(this.props.buttons.indexOf(value))}
-                        style={(value === null) ? {backgroundColor: 'gray'} : null}
+                        title={(button === null) ? null : button.name}
+                        onPress={(e)=>this.props.btnPress(idx)}
+                        style={(button === null) ? {backgroundColor: 'gray'} : null}
                         textStyle={{}}
-                        borderStyle={(this.props.buttons[this.props.sel] === value && this.props.sel !== -1) ? styles.delete_button_select : null}
-                        disable={(value === null) ? true : false}
+                        borderStyle={(this.props.buttons[this.props.sel] === button && this.props.sel !== -1) ? styles.delete_button_select : null}
+                        disable={(button === null) ? true : false}
                         />)}
                     </View>
                 </View>

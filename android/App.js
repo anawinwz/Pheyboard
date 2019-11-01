@@ -9,9 +9,13 @@ import ChangePage from './pages/change_set_page'
 
 export default class HelloWorldApp extends Component {
   state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1}
-  buttons = ['Copy', 'Paste', null, null, null, null, null, null, null, null, null, null]
+  buttons = [
+    {name: 'Copy', Input1: 'Ctrl', Input2: 'C', Input3: null, Input4: null},
+    {name: 'Paste', Input1: 'Ctrl', Input2: 'V', Input3: null, Input4: null},
+    null, null, null, null, null, null, null, null, null, null
+  ]
   headerText = ['Sample Shortcut']
-  temp_button = {name:'', Input1:null, Input2:null, Input3:null, Input4:null}
+  temp_button = {name:'', Input1: null, Input2: null, Input3: null, Input4: null}
 
   //function listener from the delete page
   setSelMem(mem){
@@ -42,7 +46,10 @@ export default class HelloWorldApp extends Component {
   }
   addMemberHandler = () =>{
     if(this.state.addMem !== -1 && this.temp_button.name !== ''){
-      this.buttons[this.state.addMem] = this.temp_button.name
+      this.buttons[this.state.addMem] = {
+        name: this.temp_button.name,
+        Input1: null, Input2: null, Input3: null, Input4: null
+      }
       this.temp_button.name='';
       this.setState({isAdd: !this.state.isAdd,addMem:-1})
       console.log("new member is added to arr")
@@ -100,14 +107,14 @@ export default class HelloWorldApp extends Component {
       </View>
       <Text style={styles.pad_name}>{this.headerText[0]}</Text>
       <View style={styles.key_pad_container}>
-        {this.buttons.map((value, idx) => <CustomButton
+        {this.buttons.map((button, idx) => <CustomButton
         key={idx} 
-        title={value}
-        onPress={()=>(value === null) ? null:Alert.alert(value)}
-        style={(value === null) ? {backgroundColor: 'gray'} : null}
+        title={(button === null) ? null : button.name}
+        onPress={()=>(button === null) ? null : Alert.alert(`${button.name} - ${button.Input1}+${button.Input2}+${button.Input3}+${button.Input4}`)}
+        style={(button === null) ? {backgroundColor: 'gray'} : null}
         textStyle={{}}
         borderStyle={{}}
-        disable={(value === null) ? true : false}
+        disable={(button === null) ? true : false}
         />)}
       </View>
     </View>

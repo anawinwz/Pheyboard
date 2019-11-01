@@ -13,8 +13,8 @@ export const AddButton = (props) => {
                         <Image style={{width:50,height:50}} source={require('../assets/plus.png')}/>
                     </View>
                 </TouchableHighlight>:
-                <View style={[styles.button,style]} >
-                    <Text>{props.title}</Text>
+                <View style={[styles.button, style]}>
+                    <Text style={[styles.text, textStyle]}>{props.title}</Text>
                 </View>
             }            
         </View>

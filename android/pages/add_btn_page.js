@@ -5,19 +5,22 @@ import {AddButton} from '../components/add_button'
 export default class AddPage extends Component{
     constructor(props){
         super(props)
-        this.btn = [...this.props.buttons]
+        this.btns = []
+    }
+    componentDidUpdate() {
+        this.btns = [...this.props.buttons]
         this.mapButton();
     }
     mapButton(){
         var j = 0;var i =0;
-        for(i=0;i<this.btn.length;i++){
-            if(this.btn[i] === null){
-                this.btn[i] = j
+        for(i=0;i<this.btns.length;i++){
+            if(this.btns[i] === null){
+                this.btns[i] = j
                 j++
             }
         }
         console.log('new buttons is create')
-        console.log(this.btn)
+        console.log(this.btns)
     }
     render(){
         return(
@@ -32,12 +35,12 @@ export default class AddPage extends Component{
                     </View>
                     <Text style={styles.head_text}>Select button to add</Text>
                     <View style={styles.add_pad_container}>
-                        {this.btn.map((value,idx)=><AddButton
+                        {this.btns.map((button,idx)=><AddButton
                             key={idx}
-                            title ={value}
-                            onPress={()=>this.props.onAdd(this.btn.indexOf(value))}
-                            style={numReg.test(value) ?{backgroundColor: 'gray'}:null }
-                            borderStyle={(this.btn[this.props.sel] === value && this.props.sel !== -1) ? styles.add_button_select : null}
+                            title ={numReg.test(button) ? button : button.name}
+                            onPress={()=>this.props.onAdd(idx)}
+                            style={numReg.test(button) ? {backgroundColor: 'gray'} : null}
+                            borderStyle={(this.btns[this.props.sel] === button && this.props.sel !== -1) ? styles.add_button_select : null}
                         />)}
                     </View>
                 </View>
