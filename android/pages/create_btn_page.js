@@ -8,7 +8,7 @@ export default class CreatePage extends Component{
         super(props)
         this.state = {
             tempName: this.props.tempName,
-            modalVisible: !this.props.isCre
+            buttonShortCut:[null,null,null,null]
         };
     }
     backHandler = ()=>{
@@ -19,6 +19,7 @@ export default class CreatePage extends Component{
     BindTempName = ()=>{
         this.props.onAdd()
         this.props.btnPress(this.state.tempName)
+        this.setState({tempName:""})
     }
     render(){
         return(
@@ -29,7 +30,7 @@ export default class CreatePage extends Component{
             >
                 <View style ={styles.modals_create}>
                     <View style={styles.create_wrapper}>
-                        <BackButton onClick={this.backHandler}/>                        
+                        <BackButton onClick={this.backHandler} style={{width:100,height:75}}/>                        
                     </View>
                     <View style={styles.tempButton}>
                         <View style={styles.preview}>
@@ -42,6 +43,20 @@ export default class CreatePage extends Component{
                             value={this.state.tempName}
                             maxLength={24}
                         />
+                    </View>
+                    <View style={styles.input_wraper}>
+                        <Text style={styles.button_name}>Button Input</Text>
+                        <View style={styles.input_shortcut}>
+                            {this.state.buttonShortCut.map((value,idx)=>
+                                <CustomButton
+                                    title={value}
+                                    key={idx}
+                                    style={{width:75,height:75}}
+                                />)}
+                        </View>
+                    </View>
+                    <View style={styles.input_wraper}>
+
                     </View>
                     <View style={styles.createButton_area}>
                         <TouchableHighlight underlayColor="white" style={styles.createButton} onPress={this.BindTempName}>
@@ -65,24 +80,20 @@ const styles = StyleSheet.create({
         paddingTop:15,
     },
     tempButton:{
-        flex:5,
+        flex:3,
         flexDirection:"column",
         justifyContent:"flex-start",
         alignItems:"center"
+    },
+    input_wraper:{flex:2},
+    input_shortcut:{
+        flexDirection:"row",
+        justifyContent:'center'
     },
     createButton_area:{
         flex:1,
         justifyContent:"flex-start",
         alignItems:"center"
-    },
-    circle:{
-        justifyContent:"center",
-        alignItems:"center",
-        width:120,
-        height:100,
-        borderBottomRightRadius:200,
-        borderTopRightRadius:200,
-        backgroundColor:"white"
     },
     button_name:{
         color: 'white', 
@@ -113,8 +124,8 @@ const styles = StyleSheet.create({
     preview:{
         justifyContent:"center",
         alignItems:"center",
-        width:100,     
-        height:100,    
+        width:90,     
+        height:90,    
         borderRadius:10,// change how round the box
         backgroundColor:"white",
         display: "flex",

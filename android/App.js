@@ -8,7 +8,7 @@ import AddPage from './pages/add_btn_page'
 import ChangePage from './pages/change_set_page'
 
 export default class HelloWorldApp extends Component {
-  state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1}
+  state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1,isChange:false}
   buttons = [
     {name: 'Copy', Input1: 'Ctrl', Input2: 'C', Input3: null, Input4: null},
     {name: 'Paste', Input1: 'Ctrl', Input2: 'V', Input3: null, Input4: null},
