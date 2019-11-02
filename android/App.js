@@ -8,14 +8,15 @@ import AddPage from './pages/add_btn_page'
 import ChangePage from './pages/change_set_page'
 
 export default class HelloWorldApp extends Component {
-  state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1,isChange:false}
+  state  = {int:0, isDel:false, selMem:-1, selCol:-1, isCre:false, isAdd:false,addMem:-1,isChange:false}
   buttons = [
     {name: 'Copy', Input1: 'Ctrl', Input2: 'C', Input3: null, Input4: null},
     {name: 'Paste', Input1: 'Ctrl', Input2: 'V', Input3: null, Input4: null},
     null, null, null, null, null, null, null, null, null, null
   ]
+  buttonColor = ['white','red','yellow','green','blue']
   headerText = ['Sample Shortcut']
-  temp_button = {name:'', Input1: null, Input2: null, Input3: null, Input4: null}
+  temp_button = {name:'', Input1: null, Input2: null, Input3: null, Input4: null, color: 'white'}
 
   //function listener from the delete page
   setSelMem(mem){
@@ -23,6 +24,9 @@ export default class HelloWorldApp extends Component {
     this.buttons[mem] !== null ? idMem = mem : idMem = -1;
     console.log("the button is selected: "+idMem);
     this.setState({selMem:idMem});
+  }
+  setSelCol(col){
+    this.setState({selCol:col});
   }
   //find what button is selected
   addMem(mem){
@@ -57,8 +61,9 @@ export default class HelloWorldApp extends Component {
     }
   }
   createPressHandler = () =>{
-    this.setState({isCre: !this.state.isCre})
+    this.setState({isCre: !this.state.isCre, selCol: -1})
     this.temp_button.name = ''
+    this.temp_button.color = 'white'
   }
   addPressHandler = () =>{
     this.setState({isAdd: !this.state.isAdd, isCre: !this.state.isCre})
@@ -82,8 +87,12 @@ export default class HelloWorldApp extends Component {
         onPress={this.createPressHandler} 
         buttons={this.buttons} 
         tempName={this.temp_button.name}
+        tempColor={this.temp_button.color}
+        buttonColor={this.buttonColor}
         onAdd={this.addPressHandler}
-        btnPress={this.BindTempName.bind(this)}
+        btnPress={this.setSelCol.bind(this)}
+        sel = {this.state.selCol}
+        crePress={this.BindTempName.bind(this)}
       />
       <AddPage
         isAdd={this.state.isAdd}

@@ -2,13 +2,15 @@ import React,{Component} from 'react'
 import {TouchableHighlight,Image,Modal,StyleSheet,Text,TextInput,View} from 'react-native'
 import {CustomButton} from '../components/custom-btn'
 import {BackButton} from '../components/back_button'
+import {CustomCircle} from '../components/custom-circle'
 
 export default class CreatePage extends Component{
     constructor(props){
         super(props)
         this.state = {
             tempName: this.props.tempName,
-            buttonShortCut:[null,null,null,null]
+            buttonShortCut:[null,null,null,null],
+            tempColor:this.props.tempColor
         };
     }
     backHandler = ()=>{
@@ -18,7 +20,7 @@ export default class CreatePage extends Component{
     }
     BindTempName = ()=>{
         this.props.onAdd()
-        this.props.btnPress(this.state.tempName)
+        this.props.crePress(this.state.tempName)
         this.setState({tempName:""})
     }
     render(){
@@ -56,7 +58,16 @@ export default class CreatePage extends Component{
                         </View>
                     </View>
                     <View style={styles.input_wraper}>
-
+                        <Text style={styles.button_name}>Button Color</Text>
+                        <View style={styles.input_shortcut}>
+                            {this.props.buttonColor.map((value,idx)=>
+                                <CustomCircle
+                                    key={idx}
+                                    style={{width:50,height:50,borderRadius:25,backgroundColor:value,borderWidth:5,borderColor:'black'}}
+                                    onPress={()=>this.props.btnPress(idx)}
+                                    borderStyle={(this.props.buttonColor[this.props.sel] === value && this.props.sel !== -1) ? styles.color_select : null}
+                                />)}
+                        </View>
                     </View>
                     <View style={styles.createButton_area}>
                         <TouchableHighlight underlayColor="white" style={styles.createButton} onPress={this.BindTempName}>
@@ -127,8 +138,12 @@ const styles = StyleSheet.create({
         width:90,     
         height:90,    
         borderRadius:10,// change how round the box
-        backgroundColor:"white",
+        backgroundColor:'white',
         display: "flex",
         margin: 10
+    },
+    color_select:{
+        borderRadius:50,
+        backgroundColor:'white'
     }
 })
