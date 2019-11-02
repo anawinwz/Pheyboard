@@ -2,7 +2,9 @@ import React,{Component} from 'react'
 import {Modal,StyleSheet,Text,View} from 'react-native'
 import DeleteSettingBar from '../components/delete_setting_bar'
 import {CustomButton} from '../components/custom-btn'
-export default class DeletePage extends Component{
+
+import { connect } from 'react-redux';
+class DeletePage extends Component{
     constructor(props){
         super(props)
     }
@@ -56,3 +58,9 @@ const styles = StyleSheet.create({
         borderRadius:10,
     }
 })
+const mapStateToProps = function(state) {
+    return {
+        buttons: state.macros.sets[state.macros.selectedSet].buttons
+    }
+}
+export default connect(mapStateToProps)(DeletePage);
