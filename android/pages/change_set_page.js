@@ -31,6 +31,17 @@ class ChangePage extends Component{
                                 </TouchableHighlight>
                             )
                         )}
+                        {this.props.sets.length < 8 && 
+                        [...Array(8-this.props.sets.length).keys()].map((idx) => (
+                                <TouchableHighlight underlayColor="white" style={styles.set_member} key={idx}
+                                onPress={() => this.props.dispatch({type: 'ADD_SET' })}>
+                                    <View style={styles.set_member}>
+                                        <View style={styles.circle}/>
+                                        <Text style={styles.set_name}>+ ADD NEW SET</Text>
+                                    </View>
+                                </TouchableHighlight>
+                                )
+                            )}
                     </View>
                 </View>
             </Modal>

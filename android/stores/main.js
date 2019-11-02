@@ -25,18 +25,18 @@ function macros(state = DEFAULT_STATE, action) {
   let newState
   switch (action.type) {
     case 'CHANGE_SET':
-      console.log(`Now selectedSet is ${state.selectedSet}`)
       return {...state, selectedSet: action.idx}
     case 'ADD_SET':
-       newState = state
-      newState.sets = [
-        ...state.sets,
-        {
-          name: `Untitled ${state.sets.length + 2}`,
-          buttons: [null, null, null, null, null, null, null, null, null, null, null]
-        }
-      ]
-      return newState
+      return {
+        ...state,
+        sets: [
+          ...state.sets,
+          {
+            name: (action.name) ? action.name : `Untitled ${state.sets.length + 1}`,
+            buttons: [null, null, null, null, null, null, null, null, null, null, null, null]
+          }
+        ]
+      }
     case 'RENAME_SET':
          newState = state
       newState.sets[action.idx].name = action.name
