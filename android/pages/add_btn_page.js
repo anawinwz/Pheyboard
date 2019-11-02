@@ -2,7 +2,10 @@ import React,{Component} from 'react'
 import {Modal,StyleSheet,Text,View,Alert} from 'react-native'
 import AddSettingBar from '../components/add_setting_bar'
 import {AddButton} from '../components/add_button'
-export default class AddPage extends Component{
+
+import { connect } from 'react-redux';
+
+class AddPage extends Component{
     constructor(props){
         super(props)
         this.btns = []
@@ -19,8 +22,6 @@ export default class AddPage extends Component{
                 j++
             }
         }
-        console.log('new buttons is create')
-        console.log(this.btns)
     }
     render(){
         return(
@@ -71,3 +72,11 @@ const styles = StyleSheet.create({
         borderRadius:10,
     }
 })
+
+const mapStateToProps = function(state) {
+    return {
+        buttons: state.macros.sets[state.macros.selectedSet].buttons
+    }
+}
+export default connect(mapStateToProps)(AddPage);
+//export default AddPage;

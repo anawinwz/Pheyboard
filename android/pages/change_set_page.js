@@ -1,7 +1,10 @@
 import React,{Component} from 'react'
 import {Modal,StyleSheet,Text,View,TouchableHighlight} from 'react-native'
 import ChangeSettingBar from '../components/change_setting_bar'
-export default class DeletePage extends Component{
+
+import { connect } from 'react-redux';
+
+class ChangePage extends Component{
     constructor(props){
         super(props)
     }
@@ -18,54 +21,16 @@ export default class DeletePage extends Component{
                     </View>
                     <Text style = {styles.head_text}>Select set</Text>
                     <View style = {styles.pad_sets_container}>
-                        <TouchableHighlight underlayColor="white" style={styles.set_member}>
-                            <View style={styles.set_member}>
-                                <View style={styles.circle}/>
-                                <Text style={styles.set_name}>Sample Shortcut</Text>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor="white" style={styles.set_member}>
-                            <View style={styles.set_member}>
-                                <View style={styles.circle}/>
-                                <Text style={styles.set_name}>Untitled set 2</Text>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor="white" style={styles.set_member}>
-                            <View style={styles.set_member}>
-                                <View style={styles.circle}/>
-                                <Text style={styles.set_name}>Untitled set 3</Text>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor="white" style={styles.set_member}>
-                            <View style={styles.set_member}>
-                                <View style={styles.circle}/>
-                                <Text style={styles.set_name}>Untitled set 4</Text>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor="white" style={styles.set_member}>
-                            <View style={styles.set_member}>
-                                <View style={styles.circle}/>
-                                <Text style={styles.set_name}>Untitled set 5</Text>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor="white" style={styles.set_member}>
-                            <View style={styles.set_member}>
-                                <View style={styles.circle}/>
-                                <Text style={styles.set_name}>Untitled set 6</Text>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor="white" style={styles.set_member}>
-                            <View style={styles.set_member}>
-                                <View style={styles.circle}/>
-                                <Text style={styles.set_name}>Untitled set 7</Text>
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor="white" style={styles.set_member}>
-                            <View style={styles.set_member}>
-                                <View style={styles.circle}/>
-                                <Text style={styles.set_name}>Untitled set 8</Text>
-                            </View>
-                        </TouchableHighlight>
+                        {this.props.sets.map((set, idx) => (
+                                <TouchableHighlight underlayColor="white" style={styles.set_member} key={idx}
+                                onPress={() => this.props.dispatch({type: 'CHANGE_SET', idx: idx})}>
+                                    <View style={styles.set_member}>
+                                        <View style={styles.circle}/>
+                                        <Text style={styles.set_name}>{set.name}</Text>
+                                    </View>
+                                </TouchableHighlight>
+                            )
+                        )}
                     </View>
                 </View>
             </Modal>
@@ -114,3 +79,13 @@ const styles = StyleSheet.create({
         margin: 0
     }
 })
+
+
+
+const mapStateToProps = function(state) {
+    return {
+        selectedSet: state.macros.selectedSet,
+        sets: state.macros.sets
+    }
+}
+export default connect(mapStateToProps)(ChangePage);
