@@ -1,6 +1,6 @@
 import React,{Component} from 'react'
-import {TouchableHighlight,Image,Modal,StyleSheet,Text,TextInput,View} from 'react-native'
-import {CustomButton} from '../components/custom-btn'
+import {TouchableHighlight,Image,Modal,StyleSheet,Text,TextInput,View,Alert} from 'react-native'
+import {InputMacro} from '../components/input-macro-btn'
 import {BackButton} from '../components/back_button'
 import {CustomCircle} from '../components/custom-circle'
 import Dialog from 'react-native-dialog'
@@ -11,14 +11,15 @@ export default class CreatePage extends Component{
         this.state = {
             tempName: this.props.tempName,
             tempColor:this.props.tempColor,
-            showDialog:false
+            showDialog:false,
+            addBtnState:0 // position of the button 
         };
     }
     buttonShortCut = [null,null,null,null]
     tempBtn = ''
     buttonColor = ['white','red','yellow','green','blue']
     backHandler = ()=>{
-        this.setState({tempName:""})
+        this.setState({tempName:"",addBtnState:0,showDialog:false})
         this.props.onPress()
     }
     BindTempName = ()=>{
@@ -28,14 +29,19 @@ export default class CreatePage extends Component{
     }
     toogleDialog = () =>{
         this.setState({showDialog:!this.state.showDialog})
+        console.log(this.state)
     }
     handleCancel= ()=>{
         this.setState({showDialog:!this.state.showDialog})
     }
     handleConfirm = () => {
-        this.buttonShortCut[0] = this.tempBtn
-        this.setState({showDialog:!this.state.showDialog})
-        console.log(this.buttonShortCut)
+        if(this.tempBtn !== ''){
+            this.buttonShortCut[this.state.addBtnState] = this.tempBtn
+            this.setState({showDialog:!this.state.showDialog,addBtnState:this.state.addBtnState + 1})
+        }else{
+            Alert.alert('You enter nothing....')
+            this.setState({showDialog:!this.state.showDialog})
+        }
     }
     hadleShort = (short : string) =>{
         this.tempBtn = short
@@ -66,18 +72,14 @@ export default class CreatePage extends Component{
                     <View style={styles.input_wraper}>
                         <Text style={styles.button_name}>Button Input</Text>
                         <View style={styles.input_shortcut}>
-                            {/* {this.state.buttonShortCut.map((value,idx)=>
-                                <CustomButton
-                                    title={value}
-                                    key={idx}
-                                    style={{width:75,height:75}}
-                                />)} */}
-                                <CustomButton
-                                    title ={'Add'}
-                                    style={{width:75,height:75}}
+                            {this.buttonShortCut.map((val,idx)=>
+                                <InputMacro
+                                    state = {this.state.addBtnState}
+                                    pos={idx}
+                                    keyMacro={val}
                                     onPress={this.toogleDialog}
-                                />
-
+                                />                            
+                            )}
                                 <Dialog.Container visible={this.state.showDialog}>
                                     <Dialog.Title>Test dialog</Dialog.Title>
                                     <Dialog.Input onChangeText={(short : string)=>this.hadleShort(short)}></Dialog.Input>
