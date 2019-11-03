@@ -11,9 +11,9 @@ import ChangePage from './pages/change_set_page'
 import { connect } from 'react-redux';
 
 class Pheyboard extends Component {
-  state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1,isChange:false}
+  state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1,isChange:false,selCol:-1}
   buttonColor = ['white','red','yellow','green','blue']
-  temp_button = {name:'',color:'white', Input1: null, Input2: null, Input3: null, Input4: null}
+  temp_button = {name:'',color:'white', Input1: null, Input2: null, Input3: null, Input4: null, color: 'white'}
 
   //function listener from the delete page
   setSelMem(mem){
@@ -22,8 +22,11 @@ class Pheyboard extends Component {
     console.log("the button is selected: "+idMem);
     this.setState({selMem:idMem});
   }
-  setSelCol(col){
-    this.setState({selCol:col});
+  setSelCol(idx){
+    this.setState({selCol:idx});
+  }
+  bindCol(idx){
+    idx == -1? this.temp_button.color = 'white' : this.temp_button.color = this.buttonColor[idx]
   }
   //find what button is selected
   addMem(mem){
@@ -32,7 +35,7 @@ class Pheyboard extends Component {
     console.log("the button is selected: "+idMem);
     this.setState({addMem:idMem});
   }
-  BindTempName(returnName){
+  BindTempButton(returnName){
     this.temp_button.name = returnName;
   }
   delPressHandler = () =>{
@@ -87,17 +90,18 @@ class Pheyboard extends Component {
         isCre={this.state.isCre} 
         onPress={this.createPressHandler} 
         tempName={this.temp_button.name}
-        tempColor={this.temp_button.color}
         buttonColor={this.buttonColor}
         onAdd={this.addPressHandler}
         btnPress={this.setSelCol.bind(this)}
         sel = {this.state.selCol}
-        crePress={this.BindTempName.bind(this)}
+        crePress={this.BindTempButton.bind(this)}
+        bindCol={this.bindCol.bind(this)}
       />
       <AddPage
         isAdd={this.state.isAdd}
         onPress={this.addPressHandler} 
         tempName={this.temp_button.name}
+        tempColor={this.temp_button.color}
         onAdd={this.addMem.bind(this)}
         sel = {this.state.addMem}
         confirm={this.addMemberHandler}

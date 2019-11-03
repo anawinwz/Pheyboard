@@ -10,7 +10,6 @@ export default class CreatePage extends Component{
         this.state = {
             tempName: this.props.tempName,
             buttonShortCut:[null,null,null,null],
-            tempColor:this.props.tempColor
         };
     }
     buttonColor = ['white','red','yellow','green','blue']
@@ -18,10 +17,10 @@ export default class CreatePage extends Component{
         this.setState({tempName:""})
         this.props.onPress()
     }
-    BindTempName = ()=>{
+    BindTempButton = ()=>{
         this.props.onAdd()
         this.props.crePress(this.state.tempName)
-        this.setState({tempName:""})
+        this.props.bindCol(this.props.sel)
     }
     render(){
         return(
@@ -70,7 +69,7 @@ export default class CreatePage extends Component{
                         </View>
                     </View>
                     <View style={styles.createButton_area}>
-                        <TouchableHighlight underlayColor="white" style={styles.createButton} onPress={this.BindTempName}>
+                        <TouchableHighlight underlayColor="white" style={styles.createButton} onPress={this.BindTempButton}>
                             <Text style={styles.button_name}>Create Button</Text>
                         </TouchableHighlight>
                     </View>

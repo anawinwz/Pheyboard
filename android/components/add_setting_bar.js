@@ -4,6 +4,7 @@ import {TouchableHighlight,Image,View,StyleSheet,Text} from 'react-native';
 export default class AddElements extends Component{
     constructor(props){
         super(props)
+        console.log("tempColor = " + this.props.tempColor)
     }
     render(){
         return(
@@ -14,7 +15,7 @@ export default class AddElements extends Component{
                             <Text style={{fontSize:14, top:5}}>Back</Text>
                         </View>
                     </TouchableHighlight>
-                    <View style={styles.button}>
+                    <View style={[styles.button,{backgroundColor:this.props.tempColor}]}>
                         <Text style={styles.text}>{this.props.tempName}</Text>
                     </View>
                     <TouchableHighlight underlayColor="white" style={styles.circle_left} onPress ={this.props.onClick}>

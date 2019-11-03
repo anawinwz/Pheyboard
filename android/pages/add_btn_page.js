@@ -32,7 +32,12 @@ class AddPage extends Component{
             >
                 <View style ={styles.modals_del}>
                     <View style={styles.del_setting_container}>
-                        <AddSettingBar onPress ={this.props.onPress} tempName={this.props.tempName} onClick={this.props.confirm}/>
+                        <AddSettingBar 
+                            onPress ={this.props.onPress} 
+                            tempName={this.props.tempName} 
+                            tempColor={this.props.tempColor} 
+                            onClick={this.props.confirm}
+                        />
                     </View>
                     <Text style={styles.head_text}>Select button to add</Text>
                     <View style={styles.add_pad_container}>
