@@ -3,16 +3,19 @@ import {TouchableHighlight,Image,Modal,StyleSheet,Text,TextInput,View} from 'rea
 import {CustomButton} from '../components/custom-btn'
 import {BackButton} from '../components/back_button'
 import {CustomCircle} from '../components/custom-circle'
+import Dialog from 'react-native-dialog'
 
 export default class CreatePage extends Component{
     constructor(props){
         super(props)
         this.state = {
             tempName: this.props.tempName,
-            buttonShortCut:[null,null,null,null],
-            tempColor:this.props.tempColor
+            tempColor:this.props.tempColor,
+            showDialog:false
         };
     }
+    buttonShortCut = [null,null,null,null]
+    tempBtn = ''
     buttonColor = ['white','red','yellow','green','blue']
     backHandler = ()=>{
         this.setState({tempName:""})
@@ -22,6 +25,20 @@ export default class CreatePage extends Component{
         this.props.onAdd()
         this.props.crePress(this.state.tempName)
         this.setState({tempName:""})
+    }
+    toogleDialog = () =>{
+        this.setState({showDialog:!this.state.showDialog})
+    }
+    handleCancel= ()=>{
+        this.setState({showDialog:!this.state.showDialog})
+    }
+    handleConfirm = () => {
+        this.buttonShortCut[0] = this.tempBtn
+        this.setState({showDialog:!this.state.showDialog})
+        console.log(this.buttonShortCut)
+    }
+    hadleShort = (short : string) =>{
+        this.tempBtn = short
     }
     render(){
         return(
@@ -49,12 +66,24 @@ export default class CreatePage extends Component{
                     <View style={styles.input_wraper}>
                         <Text style={styles.button_name}>Button Input</Text>
                         <View style={styles.input_shortcut}>
-                            {this.state.buttonShortCut.map((value,idx)=>
+                            {/* {this.state.buttonShortCut.map((value,idx)=>
                                 <CustomButton
                                     title={value}
                                     key={idx}
                                     style={{width:75,height:75}}
-                                />)}
+                                />)} */}
+                                <CustomButton
+                                    title ={'Add'}
+                                    style={{width:75,height:75}}
+                                    onPress={this.toogleDialog}
+                                />
+
+                                <Dialog.Container visible={this.state.showDialog}>
+                                    <Dialog.Title>Test dialog</Dialog.Title>
+                                    <Dialog.Input onChangeText={(short : string)=>this.hadleShort(short)}></Dialog.Input>
+                                    <Dialog.Button label="Cancel" onPress={this.handleCancel} />
+                                    <Dialog.Button label="Confirm" onPress={this.handleConfirm} />
+                                </Dialog.Container>
                         </View>
                     </View>
                     <View style={styles.input_wraper}>
