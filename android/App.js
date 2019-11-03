@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 class Pheyboard extends Component {
   state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1,isChange:false}
   buttonColor = ['white','red','yellow','green','blue']
-  temp_button = {name:'', Input1: null, Input2: null, Input3: null, Input4: null}
+  temp_button = {name:'',color:'white', Input1: null, Input2: null, Input3: null, Input4: null}
 
   //function listener from the delete page
   setSelMem(mem){

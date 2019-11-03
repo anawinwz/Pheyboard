@@ -13,10 +13,10 @@ export default class CreatePage extends Component{
             tempColor:this.props.tempColor
         };
     }
+    buttonColor = ['white','red','yellow','green','blue']
     backHandler = ()=>{
         this.setState({tempName:""})
         this.props.onPress()
-        console.log(this.state.tempName)
     }
     BindTempName = ()=>{
         this.props.onAdd()
@@ -35,7 +35,7 @@ export default class CreatePage extends Component{
                         <BackButton onClick={this.backHandler} style={{width:100,height:75}}/>                        
                     </View>
                     <View style={styles.tempButton}>
-                        <View style={styles.preview}>
+                        <View style={[styles.preview,(this.props.sel !== -1)?{backgroundColor:this.buttonColor[this.props.sel]}:null]}>
                             <Text>{this.state.tempName}</Text>
                         </View>
                         <Text style={styles.button_name}>Button Name</Text>
