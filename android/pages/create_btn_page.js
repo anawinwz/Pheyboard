@@ -25,6 +25,7 @@ export default class CreatePage extends Component{
     BindTempName = ()=>{
         this.props.onAdd()
         this.props.crePress(this.state.tempName)
+        this.props.arrRtn(this.buttonShortCut)
         this.setState({tempName:""})
     }
     toogleDialog = () =>{
