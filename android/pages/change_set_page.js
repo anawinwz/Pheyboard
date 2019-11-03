@@ -23,9 +23,9 @@ class ChangePage extends Component{
                     <View style = {styles.pad_sets_container}>
                         {this.props.sets.map((set, idx) => (
                                 <TouchableHighlight underlayColor="white" style={styles.set_member} key={idx}
-                                onPress={() => this.props.dispatch({type: 'CHANGE_SET', idx: idx})}>
+                                onPress={() => {this.props.dispatch({type: 'CHANGE_SET', idx: idx}); this.props.btnPress(idx);}}>
                                     <View style={styles.set_member}>
-                                        <View style={styles.circle}/>
+                                        <View style={[styles.circle,(this.props.sets[this.props.sel] === set && this.props.sel !== -1) ? {backgroundColor : 'dodgerblue'} : {backgroundColor : 'white'} ]}/>
                                         <Text style={styles.set_name}>{set.name}</Text>
                                     </View>
                                 </TouchableHighlight>
@@ -36,8 +36,7 @@ class ChangePage extends Component{
                                 <TouchableHighlight underlayColor="white" style={styles.set_member} key={idx}
                                 onPress={() => this.props.dispatch({type: 'ADD_SET' })}>
                                     <View style={styles.set_member}>
-                                        <View style={styles.circle}/>
-                                        <Text style={styles.set_name}>+ ADD NEW SET</Text>
+                                        <Text style={[styles.set_name,{marginLeft:10}]}>+ ADD NEW SET</Text>
                                     </View>
                                 </TouchableHighlight>
                                 )
@@ -70,7 +69,8 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     set_member:{
-        justifyContent:"center",
+        flexDirection:'row',
+        justifyContent:"flex-start",
         alignItems:"center",
         backgroundColor:"grey",
         width:350,     
@@ -83,11 +83,13 @@ const styles = StyleSheet.create({
         fontSize:20
     },
     circle:{
-        color: "white",
-        width: 10,
-        height: 10,
-        borderRadius: 0,
-        margin: 0
+        backgroundColor: 'dodgerblue',
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        borderWidth:5,
+        borderColor:'white',
+        margin: 10
     }
 })
 

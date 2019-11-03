@@ -11,7 +11,7 @@ import ChangePage from './pages/change_set_page'
 import { connect } from 'react-redux';
 
 class Pheyboard extends Component {
-  state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1,isChange:false,selCol:-1}
+  state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1,isChange:false,selCol:-1, ResetTempFromAdd:-1, selSet:0}
   buttonColor = ['white','#db1d1d','#dbc81d','#3bdb1d','#1d89db']
   temp_button = {name:'',color:'white', Input1: null, Input2: null, Input3: null, Input4: null, color: 'white'}
 
@@ -27,6 +27,9 @@ class Pheyboard extends Component {
   }
   bindCol(idx){
     idx == -1? this.temp_button.color = 'white' : this.temp_button.color = this.buttonColor[idx]
+  }
+  SelectSet(idx){
+    this.setState({selSet:idx});
   }
   //find what button is selected
   addMem(mem){
@@ -61,8 +64,8 @@ class Pheyboard extends Component {
         color: this.temp_button.color
       })
       console.log("add color = " + this.temp_button.color)
-      this.temp_button.name='';
-      this.temp_button.color='white';
+      this.temp_button.name=''
+      this.temp_button.color='white'
       this.setState({isAdd: !this.state.isAdd,addMem:-1,selCol:-1})
       console.log("new member is added to arr")
       console.log(this.props.buttons)
@@ -111,7 +114,9 @@ class Pheyboard extends Component {
       />
       <ChangePage
         isChange={this.state.isChange}
-        onPress={this.changePressHandler} 
+        onPress={this.changePressHandler}
+        btnPress={this.SelectSet.bind(this)}
+        sel={this.state.selSet}
       />
       <View style={styles.setting_container}>
         <SettingBar 
@@ -126,7 +131,7 @@ class Pheyboard extends Component {
         key={idx} 
         title={(button === null) ? null : button.name}
         onPress={()=>(button === null) ? null : Alert.alert(`${button.name} - ${button.Input1}+${button.Input2}+${button.Input3}+${button.Input4}`)}
-        style={(button === null) ? {backgroundColor: 'gray'} : {backgroundColor: button.color}}
+        style={(button === null) ? {backgroundColor: '#212121'} : {backgroundColor: button.color}}
         textStyle={{}}
         borderStyle={{}}
         disable={(button === null) ? true : false}

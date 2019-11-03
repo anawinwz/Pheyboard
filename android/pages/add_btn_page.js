@@ -45,7 +45,7 @@ class AddPage extends Component{
                             key={idx}
                             title ={numReg.test(button) ? button : button.name}
                             onPress={()=>this.props.onAdd(idx)}
-                            style={numReg.test(button) ? {backgroundColor: 'gray'} : {backgroundColor: button.color}}
+                            style={numReg.test(button) ? {backgroundColor: '#212121'} : {backgroundColor: button.color}}
                             borderStyle={(this.btns[this.props.sel] === button && this.props.sel !== -1) ? styles.add_button_select : null}
                         />)}
                     </View>

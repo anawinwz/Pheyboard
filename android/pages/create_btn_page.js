@@ -9,7 +9,7 @@ export default class CreatePage extends Component{
         super(props)
         this.state = {
             tempName: this.props.tempName,
-            buttonShortCut:[null,null,null,null],
+            buttonShortCut:[null,null,null,null]
         };
     }
     buttonColor = ['white','#db1d1d','#dbc81d','#3bdb1d','#1d89db']
