@@ -6,8 +6,8 @@ const DEFAULT_STATE = {
     {
       name: `Sample Shortcut`,
       buttons: [
-        {name: 'Copy', Input1: 'Ctrl', Input2: 'C', Input3: null, Input4: null}, 
-        {name: 'Paste', Input1: 'Ctrl', Input2: 'V', Input3: null, Input4: null},
+        {name: 'Copy', Input1: 'Ctrl', Input2: 'C', Input3: null, Input4: null, color:'white'}, 
+        {name: 'Paste', Input1: 'Ctrl', Input2: 'V', Input3: null, Input4: null, color:'white'},
         null, null, null, null, null, null, null, null, null, null
       ]
     },
@@ -15,8 +15,8 @@ const DEFAULT_STATE = {
       name: `Sample Shortcut 2`,
       buttons: [
         null, null, null, null, null, null, null, null, null, null,
-        {name: 'Copy', Input1: 'Ctrl', Input2: 'C', Input3: null, Input4: null}, 
-        {name: 'Paste', Input1: 'Ctrl', Input2: 'V', Input3: null, Input4: null}
+        {name: 'Copy', Input1: 'Ctrl', Input2: 'C', Input3: null, Input4: null, color:'green'}, 
+        {name: 'Paste', Input1: 'Ctrl', Input2: 'V', Input3: null, Input4: null, color:'red'}
       ]
     }
   ]
@@ -53,7 +53,8 @@ function macros(state = DEFAULT_STATE, action) {
          newState = state
       newState.sets[newState.selectedSet].buttons[action.idx] = {
         name: action.name,
-        Input1: action.Input1, Input2: action.Input2, Input3: action.Input3, Input4: action.Input4
+        Input1: action.Input1, Input2: action.Input2, Input3: action.Input3, Input4: action.Input4,
+        color: action.color
       }
       return newState
     case 'DELETE_BUTTON':

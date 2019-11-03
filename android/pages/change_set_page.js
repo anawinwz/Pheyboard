@@ -50,7 +50,7 @@ class ChangePage extends Component{
 }
 const styles = StyleSheet.create({
     modals_del:{
-        backgroundColor:"black",
+        backgroundColor:"#151515",
         flex:1
     },
     del_setting_container:{

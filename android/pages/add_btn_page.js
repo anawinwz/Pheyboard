@@ -45,7 +45,7 @@ class AddPage extends Component{
                             key={idx}
                             title ={numReg.test(button) ? button : button.name}
                             onPress={()=>this.props.onAdd(idx)}
-                            style={numReg.test(button) ? {backgroundColor: 'gray'} : null}
+                            style={numReg.test(button) ? {backgroundColor: 'gray'} : {backgroundColor: button.color}}
                             borderStyle={(this.btns[this.props.sel] === button && this.props.sel !== -1) ? styles.add_button_select : null}
                         />)}
                     </View>
@@ -57,7 +57,7 @@ class AddPage extends Component{
 const numReg = RegExp('[1234567890]')
 const styles = StyleSheet.create({
     modals_del:{
-        backgroundColor:"black",
+        backgroundColor:"#151515",
         flex:1
     },
     del_setting_container:{
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         marginBottom: 0
     },
     add_button_select:{
-        backgroundColor:'green',
+        backgroundColor:'#4fd146',
         borderRadius:10,
     }
 })

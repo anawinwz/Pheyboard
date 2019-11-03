@@ -25,7 +25,7 @@ class DeletePage extends Component{
                         key={idx} 
                         title={(button === null) ? null : button.name}
                         onPress={(e)=>this.props.btnPress(idx)}
-                        style={(button === null) ? {backgroundColor: 'gray'} : null}
+                        style={(button === null) ? {backgroundColor: 'gray'} : {backgroundColor: button.color}}
                         textStyle={{}}
                         borderStyle={(this.props.buttons[this.props.sel] === button && this.props.sel !== -1) ? styles.delete_button_select : null}
                         disable={(button === null) ? true : false}
@@ -38,7 +38,7 @@ class DeletePage extends Component{
 }
 const styles = StyleSheet.create({
     modals_del:{
-        backgroundColor:"black",
+        backgroundColor:"#151515",
         flex:1
     },
     del_setting_container:{
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         marginBottom: 0
     },
     delete_button_select:{
-        backgroundColor:'red',
+        backgroundColor:'#a6151a',
         borderRadius:10,
     }
 })

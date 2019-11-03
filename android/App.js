@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 
 class Pheyboard extends Component {
   state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1,isChange:false,selCol:-1}
-  buttonColor = ['white','red','yellow','green','blue']
+  buttonColor = ['white','#db1d1d','#dbc81d','#3bdb1d','#1d89db']
   temp_button = {name:'',color:'white', Input1: null, Input2: null, Input3: null, Input4: null, color: 'white'}
 
   //function listener from the delete page
@@ -57,10 +57,13 @@ class Pheyboard extends Component {
       } */
       this.props.dispatch({type: 'ADD_BUTTON', idx: this.state.addMem, 
         name: this.temp_button.name,
-        Input1: null, Input2: null, Input3: null, Input4: null
+        Input1: null, Input2: null, Input3: null, Input4: null,
+        color: this.temp_button.color
       })
+      console.log("add color = " + this.temp_button.color)
       this.temp_button.name='';
-      this.setState({isAdd: !this.state.isAdd,addMem:-1})
+      this.temp_button.color='white';
+      this.setState({isAdd: !this.state.isAdd,addMem:-1,selCol:-1})
       console.log("new member is added to arr")
       console.log(this.props.buttons)
     }
@@ -123,7 +126,7 @@ class Pheyboard extends Component {
         key={idx} 
         title={(button === null) ? null : button.name}
         onPress={()=>(button === null) ? null : Alert.alert(`${button.name} - ${button.Input1}+${button.Input2}+${button.Input3}+${button.Input4}`)}
-        style={(button === null) ? {backgroundColor: 'gray'} : null}
+        style={(button === null) ? {backgroundColor: 'gray'} : {backgroundColor: button.color}}
         textStyle={{}}
         borderStyle={{}}
         disable={(button === null) ? true : false}
@@ -135,7 +138,7 @@ class Pheyboard extends Component {
 }
 const styles = StyleSheet.create({
   main_container:{
-    backgroundColor:"black",
+    backgroundColor:"#151515",
     flex:1
   },
   setting_container:{

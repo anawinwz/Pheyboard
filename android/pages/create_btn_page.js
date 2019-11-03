@@ -12,7 +12,7 @@ export default class CreatePage extends Component{
             buttonShortCut:[null,null,null,null],
         };
     }
-    buttonColor = ['white','red','yellow','green','blue']
+    buttonColor = ['white','#db1d1d','#dbc81d','#3bdb1d','#1d89db']
     backHandler = ()=>{
         this.setState({tempName:""})
         this.props.onPress()
@@ -62,7 +62,7 @@ export default class CreatePage extends Component{
                             {this.props.buttonColor.map((value,idx)=>
                                 <CustomCircle
                                     key={idx}
-                                    style={{width:50,height:50,borderRadius:25,backgroundColor:value,borderWidth:5,borderColor:'black'}}
+                                    style={{width:50,height:50,borderRadius:25,backgroundColor:value,borderWidth:5,borderColor:'#151515'}}
                                     onPress={()=>this.props.btnPress(idx)}
                                     borderStyle={(this.props.buttonColor[this.props.sel] === value && this.props.sel !== -1) ? styles.color_select : null}
                                 />)}
@@ -82,7 +82,7 @@ export default class CreatePage extends Component{
 const styles = StyleSheet.create({
     modals_create:{
         flex:1,
-        backgroundColor:"black"
+        backgroundColor:"#151515"
     },
     create_wrapper:{
         flex:1,
