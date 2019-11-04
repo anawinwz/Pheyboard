@@ -11,7 +11,7 @@ export const InputMacro = (props) =>{
                     <View style={[styles.button,{backgroundColor:"green"}]}>
                         <Text style={[styles.text,{color:'white'}]}>{keyMacro}</Text>
                         <View style={styles.editbox}>
-                            <Text style={{color:'white',fontSize:12}}>EDIT</Text>
+                            <Text style={{color:'black',fontSize:12}}>EDIT</Text>
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
         height:20,    
         borderBottomLeftRadius:10,
         borderBottomRightRadius:10,
-        backgroundColor:"orange",
+        backgroundColor:"white",
         position:'absolute', 
         left:0, 
         right:0,
