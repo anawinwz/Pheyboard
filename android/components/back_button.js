@@ -6,7 +6,7 @@ export const BackButton = (props) => {
     const {onClick} = props;
     return(
         <View style={styles.back_warperq}>
-            <TouchableHighlight onPress = {props.onClick} style={[styles.circle_left,props.style]}>
+            <TouchableHighlight underlayColor="grey" onPress = {props.onClick} style={[styles.circle_left,props.style]}>
                 <View style={styles.button_content}>
                     <Image style={{width:40,height:40}} source = {require('../assets/left.png')}/>
                     <Text style={{fontSize:14, top:5}}>Back</Text>

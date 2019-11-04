@@ -6,7 +6,7 @@ export const InputMacro = (props) =>{
     if(state > pos){
         return(
             <View style={[styles.button,{backgroundColor:"green"}]}>
-                <Text style={styles.text}>{keyMacro}</Text>
+                <Text style={[styles.text,{color:'white'}]}>{keyMacro}</Text>
             </View>
         )
     }

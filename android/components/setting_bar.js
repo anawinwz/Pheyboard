@@ -14,7 +14,7 @@ export default class SemiCircle extends Component{
         return(
             <View style={styles.circle_wrapper}>
               {this.state.collapse ? 
-                <TouchableHighlight onPress={this.checkCollapse} underlayColor="white" style={styles.circle}>
+                <TouchableHighlight onPress={this.checkCollapse} underlayColor="grey" style={styles.circle}>
                   <View style={styles.circle}>
                     <Image style={{width:50,height:50}} source={require('../assets/option.png')}/>
                     <Text style={{fontSize:14, top:5}}>OPTION</Text>
@@ -22,26 +22,26 @@ export default class SemiCircle extends Component{
                 </TouchableHighlight> 
                 :
                 <View style={styles.circle_full}>
-                  <TouchableHighlight onPress={this.checkCollapse} underlayColor="white" style={styles.setting_button}>
-                    <View style={styles.setting_button}>
+                  <TouchableHighlight onPress={this.checkCollapse} underlayColor="grey" style={styles.setting_button}>
+                    <View style={[styles.setting_button,{backgroundColor:'white'}]}>
                       <Image style={{width:50,height:50}} source={require('../assets/right.png')}/>
                       <Text style={{fontSize:14, top:5}}>BACK</Text>
                     </View>                    
                   </TouchableHighlight>
-                  <TouchableHighlight onPress={this.props.CrePress} underlayColor="white" style={styles.setting_button}>
-                    <View style={styles.setting_button}>
+                  <TouchableHighlight onPress={this.props.CrePress} underlayColor="grey" style={styles.setting_button}>
+                    <View style={[styles.setting_button,{backgroundColor:'white'}]}>
                       <Image style={{width:50,height:50}} source={require('../assets/add.png')}/>
                       <Text style={{fontSize:14, top:5}}>ADD</Text>
                     </View>                                                        
                   </TouchableHighlight>
-                  <TouchableHighlight onPress={this.props.DelPress} underlayColor="white" style={styles.setting_button}>
-                    <View style={styles.setting_button}>
+                  <TouchableHighlight onPress={this.props.DelPress} underlayColor="grey" style={styles.setting_button}>
+                    <View style={[styles.setting_button,{backgroundColor:'white'}]}>
                       <Image style={{width:50,height:50}} source={require('../assets/delete.png')}/>
                       <Text style={{fontSize:14, top:5}}>DELETE</Text>
                     </View>                                                        
                   </TouchableHighlight>
-                  <TouchableHighlight onPress={this.props.ChangePress} underlayColor="white" style={styles.setting_button}>
-                    <View style={styles.setting_button}>
+                  <TouchableHighlight onPress={this.props.ChangePress} underlayColor="grey" style={styles.setting_button}>
+                    <View style={[styles.setting_button,{backgroundColor:'white'}]}>
                       <Image style={{width:50,height:50}} source={require('../assets/sets.png')}/>
                       <Text style={{fontSize:14, top:5}}>CHANGE</Text>
                     </View>                                                        

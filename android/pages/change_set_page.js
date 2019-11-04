@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {Modal,StyleSheet,Text,View,TouchableHighlight} from 'react-native'
+import {Modal,StyleSheet,Text,View,TouchableHighlight,Image} from 'react-native'
 import ChangeSettingBar from '../components/change_setting_bar'
 import Dialog from 'react-native-dialog'
 
@@ -47,7 +47,9 @@ class ChangePage extends Component{
                                         <View style={[styles.circle,(this.props.sets[this.props.sel] === set && this.props.sel !== -1) ? {backgroundColor : 'dodgerblue'} : {backgroundColor : 'white'} ]}/>
                                         <Text style={styles.set_name}>{set.name}</Text>
                                         <TouchableHighlight onPress={() => {this.toggleRenameDialog(idx)}}>
-                                            <View style={[styles.circle, styles.rename]}></View>
+                                            <View style={styles.rename_icon}>
+                                                <Image style={{width:35,height:35}} source={require('../assets/rename.png')}/>
+                                            </View>
                                         </TouchableHighlight>
                                     </View>
                                 </TouchableHighlight>
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
         backgroundColor:"grey",
         marginLeft: 30,
         marginRight: 30,
-        marginBottom: 0,
+        marginBottom: 20,
         marginTop: 10
     },
     set_member:{
@@ -102,14 +104,14 @@ const styles = StyleSheet.create({
         alignItems:"center",
         backgroundColor:"grey",
         width:350,     
-        height:60,    
+        height:58,    
         borderRadius:10,// change how round the box
         display: "flex",
     },
     set_name:{
         color: 'white', 
         fontSize:20,
-        width: '60%'
+        width: '68%'
     },
     circle:{
         backgroundColor: 'dodgerblue',
@@ -120,9 +122,12 @@ const styles = StyleSheet.create({
         borderColor:'white',
         margin: 10
     },
-    rename: {
-        backgroundColor: 'orange',
-        borderColor: 'orange'
+    rename_icon: {
+        backgroundColor: 'grey',
+        width: 50,
+        height: 50,
+        alignItems:'center',
+        justifyContent:'center'
     }
 })
 

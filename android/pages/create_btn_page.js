@@ -89,7 +89,7 @@ export default class CreatePage extends Component{
                                 />                            
                             )}
                                 <Dialog.Container visible={this.state.showDialog}>
-                                    <Dialog.Title>Test dialog</Dialog.Title>
+                                    <Dialog.Title>Insert Macro Input</Dialog.Title>
                                     <Dialog.Input onChangeText={(short)=>this.hadleShort(short)}></Dialog.Input>
                                     <Dialog.Button label="Cancel" onPress={this.handleCancel} />
                                     <Dialog.Button label="Confirm" onPress={this.handleConfirm} />

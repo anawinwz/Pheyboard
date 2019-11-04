@@ -30,7 +30,7 @@ export default class ChangeElements extends Component{
                 </TouchableHighlight>
                 <TouchableHighlight underlayColor="white" style={styles.circle_left} onPress ={this.toggleResetDialog.bind(this)}>
                     <View style={styles.button_content}>
-                        <Image style={{width:50,height:50}} source={require('../assets/add.png')}/>
+                        <Image style={{width:65,height:50}} source={require('../assets/reset.png')}/>
                         <Text style={{fontSize:10, top:5}}>Reset selected set</Text>
                     </View>
                 </TouchableHighlight>
