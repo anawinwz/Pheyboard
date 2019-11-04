@@ -36,7 +36,7 @@ class ChangePage extends Component{
             >
                 <View style ={styles.modals_del}>
                     <View style={styles.del_setting_container}>
-                        <ChangeSettingBar onPress ={this.props.onPress}/>
+                        <ChangeSettingBar onPress ={this.props.onPress} selectedSet={this.props.sets[this.props.selectedSet].name} dispatch={this.props.dispatch} />
                     </View>
                     <Text style = {styles.head_text}>Select set</Text>
                     <View style = {styles.pad_sets_container}>

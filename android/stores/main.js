@@ -52,6 +52,8 @@ function macros(state = DEFAULT_STATE, action) {
         }
         return {...newState}
       }
+    case 'RESET_CURRENT_SET':
+      action.idx = state.selectedSet
     case 'RESET_SET':
       {
         const newState = state

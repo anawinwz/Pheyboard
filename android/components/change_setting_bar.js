@@ -1,9 +1,23 @@
 import React,{Component} from 'react';
 import {TouchableHighlight,Image,View,StyleSheet,Text} from 'react-native';
+import Dialog from 'react-native-dialog'
 
 export default class ChangeElements extends Component{
     constructor(props){
         super(props)
+        this.state = {
+            showResetDialog: false
+        }
+    }
+    toggleResetDialog() {
+        this.setState({showResetDialog: !this.state.showResetDialog})
+    }
+    handleResetCancel() {
+        this.setState({showResetDialog: false})
+    }
+    handleResetConfirm() {
+        this.props.dispatch({type: 'RESET_CURRENT_SET'})
+        this.setState({showResetDialog: false})
     }
     render(){
         return(
@@ -14,6 +28,21 @@ export default class ChangeElements extends Component{
                         <Text style={{fontSize:14, top:5}}>Back</Text>
                     </View>
                 </TouchableHighlight>
+                <TouchableHighlight underlayColor="white" style={styles.circle_left} onPress ={this.toggleResetDialog.bind(this)}>
+                    <View style={styles.button_content}>
+                        <Image style={{width:50,height:50}} source={require('../assets/add.png')}/>
+                        <Text style={{fontSize:10, top:5}}>Reset selected set</Text>
+                    </View>
+                </TouchableHighlight>
+                <Dialog.Container visible={this.state.showResetDialog}>
+                    <Dialog.Title>Reset Selected Set</Dialog.Title>
+                    <Dialog.Description>
+                        "Reset Selected Set" will remove all buttons in this set and rename their set to default name.
+                        Do you want to reset "{this.props.selectedSet}" set?
+                    </Dialog.Description>
+                    <Dialog.Button label="No" onPress={this.handleResetCancel.bind(this)} />
+                    <Dialog.Button label="Yes" onPress={this.handleResetConfirm.bind(this)} />
+                </Dialog.Container>
             </View>
         )
     }
