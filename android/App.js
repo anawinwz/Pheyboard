@@ -159,7 +159,6 @@ const styles = StyleSheet.create({
   pad_name:{color: 'white', fontSize:36, textAlign: 'center'},
   key_pad_container:{
     flex:4,
-    paddingLeft:10,
     flexDirection: 'row', 
     justifyContent: 'center',
     flexWrap: 'wrap',

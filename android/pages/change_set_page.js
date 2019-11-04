@@ -68,8 +68,8 @@ class ChangePage extends Component{
                     </View>
                     
                     <Dialog.Container visible={this.state.showRenameDialog}>
-                        <Dialog.Title>Insert set name</Dialog.Title>
-                        <Dialog.Input value={this.state.renameInput} onChangeText={this.handleRenameChange.bind(this)}></Dialog.Input>
+                        <Dialog.Title style={{fontSize:24}}>Insert set name</Dialog.Title>
+                        <Dialog.Input style={{fontSize:18}} placeholder="Type set name here!" value={this.state.renameInput} onChangeText={this.handleRenameChange.bind(this)}></Dialog.Input>
                         <Dialog.Button label="Cancel" onPress={this.handleRenameCancel.bind(this)} />
                         <Dialog.Button label="Confirm" onPress={this.handleRenameConfirm.bind(this)} />
                     </Dialog.Container>

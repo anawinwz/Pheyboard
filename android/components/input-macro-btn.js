@@ -2,13 +2,29 @@ import React from 'react'
 import {TouchableOpacity,View,Text,StyleSheet} from 'react-native'
 
 export const InputMacro = (props) =>{
-    const {onPress,state,keyMacro,pos} = props
+    const {EditPress,onPress,state,keyMacro,pos} = props
     if(state > pos){
-        return(
+        if(state == pos + 1)
+        {
+            return(
+                <TouchableOpacity onPress={EditPress} style={styles.button}>
+                    <View style={[styles.button,{backgroundColor:"green"}]}>
+                        <Text style={[styles.text,{color:'white'}]}>{keyMacro}</Text>
+                        <View style={styles.editbox}>
+                            <Text style={{color:'white',fontSize:12}}>EDIT</Text>
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            )
+        }
+        else
+        {
+            return(
             <View style={[styles.button,{backgroundColor:"green"}]}>
                 <Text style={[styles.text,{color:'white'}]}>{keyMacro}</Text>
             </View>
-        )
+            )
+        }
     }
     else if(state === pos){
         return(
@@ -35,8 +51,21 @@ const styles = StyleSheet.create({
         display: "flex",
         margin: 10
     },
+    editbox:{
+        justifyContent:"center",
+        alignItems:"center",
+        width:75,     
+        height:20,    
+        borderBottomLeftRadius:10,
+        borderBottomRightRadius:10,
+        backgroundColor:"orange",
+        position:'absolute', 
+        left:0, 
+        right:0,
+        bottom:0
+    },
     text: {
         fontSize: 20,
         textAlign: "center"
-    },
+    }
 })

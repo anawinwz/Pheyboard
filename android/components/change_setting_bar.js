@@ -35,9 +35,9 @@ export default class ChangeElements extends Component{
                     </View>
                 </TouchableHighlight>
                 <Dialog.Container visible={this.state.showResetDialog}>
-                    <Dialog.Title>Reset Selected Set</Dialog.Title>
+                    <Dialog.Title style={{fontSize:24}}>Warning</Dialog.Title>
                     <Dialog.Description>
-                        "Reset Selected Set" will remove all buttons in this set and rename their set to default name.
+                        "Reset Selected Set" will remove all buttons in this set and rename their set to default name.{"\n\n"}
                         Do you want to reset "{this.props.selectedSet}" set?
                     </Dialog.Description>
                     <Dialog.Button label="No" onPress={this.handleResetCancel.bind(this)} />

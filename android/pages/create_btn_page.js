@@ -11,10 +11,13 @@ export default class CreatePage extends Component{
         super(props)
         this.state = {
             tempName: this.props.tempName,
-            showDialog:false,
+            showAddDialog:false,
+            showEditDialog:false,
+            showNothingDialog:false,
             addBtnState:0 // position of the button 
         };
     }
+    tempBtn = ''
     buttonShortCut = [null,null,null,null]
     buttonColor = ['white','#db1d1d','#dbc81d','#3bdb1d','#1d89db']
     backHandler = ()=>{
@@ -34,21 +37,50 @@ export default class CreatePage extends Component{
         this.setState({addBtnState:0})
         this.buttonShortCut=[null,null,null,null]
     }
-    toogleDialog = () =>{
-        this.setState({showDialog:!this.state.showDialog})
+    toogleAddDialog = () =>{
+        this.setState({showAddDialog:!this.state.showAddDialog})
         console.log(this.state)
     }
-    handleCancel= ()=>{
-        this.setState({showDialog:!this.state.showDialog})
+    toogleEditDialog = () =>{
+        this.setState({showEditDialog:!this.state.showEditDialog})
+        console.log(this.state)
     }
-    handleConfirm = () => {
-        if(this.tempBtn !== ''){
-            this.buttonShortCut[this.state.addBtnState] = this.tempBtn
-            this.setState({showDialog:!this.state.showDialog,addBtnState:this.state.addBtnState + 1})
-        }else{
-            Alert.alert('You enter nothing....')
-            this.setState({showDialog:!this.state.showDialog})
+    handleDelete= ()=>{
+        if(this.state.addBtnState > 0)
+        {
+            this.buttonShortCut[this.state.addBtnState - 1] = null
+            this.setState({addBtnState:this.state.addBtnState - 1})
         }
+        this.tempBtn = ''
+        this.setState({showEditDialog:!this.state.showEditDialog})
+    }
+    handleAddCancel= ()=>{
+        this.setState({showAddDialog:!this.state.showAddDialog})
+    }
+    handleAddConfirm = () => {
+        if(this.tempBtn !== '' && this.state.addBtnState < 4){
+            this.buttonShortCut[this.state.addBtnState] = this.tempBtn
+            this.tempBtn = ''
+            this.setState({showAddDialog:!this.state.showAddDialog,addBtnState:this.state.addBtnState + 1})
+        }else{
+            /*Alert.alert('You enter nothing....')*/
+            this.setState({showAddDialog:!this.state.showAddDialog,showNothingDialog:!this.state.showNothingDialog})
+        }
+    }
+    handleEditCancel= ()=>{
+        this.setState({showEditDialog:!this.state.showEditDialog})
+    }
+    handleEditConfirm = () => {
+        if(this.tempBtn !== ''){
+            this.buttonShortCut[this.state.addBtnState - 1] = this.tempBtn
+            this.tempBtn = ''
+            this.setState({showEditDialog:!this.state.showEditDialog})
+        }else{
+            this.setState({showEditDialog:!this.state.showEditDialog,showNothingDialog:!this.state.showNothingDialog})
+        }
+    }
+    handleNothingConfirm = () => {
+        this.setState({showNothingDialog:!this.state.showNothingDialog})
     }
     hadleShort = (short) =>{
         this.tempBtn = short
@@ -76,7 +108,7 @@ export default class CreatePage extends Component{
                             maxLength={24}
                         />
                     </View>
-                    <View style={styles.input_wraper}>
+                    <View style={{position: 'absolute', top: 310, left: 0, right: 0}}>
                         <Text style={styles.button_name}>Button Input</Text>
                         <View style={styles.input_shortcut}>
                         {this.buttonShortCut.map((val,idx)=>
@@ -85,18 +117,30 @@ export default class CreatePage extends Component{
                                     pos={idx}
                                     key={idx}
                                     keyMacro={val}
-                                    onPress={this.toogleDialog}
+                                    onPress={this.toogleAddDialog}
+                                    EditPress={this.toogleEditDialog}
                                 />                            
                             )}
-                                <Dialog.Container visible={this.state.showDialog}>
-                                    <Dialog.Title>Insert Macro Input</Dialog.Title>
-                                    <Dialog.Input onChangeText={(short)=>this.hadleShort(short)}></Dialog.Input>
-                                    <Dialog.Button label="Cancel" onPress={this.handleCancel} />
-                                    <Dialog.Button label="Confirm" onPress={this.handleConfirm} />
+                                <Dialog.Container visible={this.state.showAddDialog}>
+                                    <Dialog.Title style={{fontSize:24}}>Insert Macro Input</Dialog.Title>
+                                    <Dialog.Input style={{fontSize:18}} placeholder="Type input here!" onChangeText={(short)=>this.hadleShort(short)}></Dialog.Input>
+                                    <Dialog.Button label="Cancel" onPress={this.handleAddCancel} />
+                                    <Dialog.Button label="Add" onPress={this.handleAddConfirm} />
+                                </Dialog.Container>
+                                <Dialog.Container visible={this.state.showEditDialog}>
+                                    <Dialog.Title style={{fontSize:24}}>Edit Macro Input</Dialog.Title>
+                                    <Dialog.Input style={{fontSize:18}} placeholder="Type input here!" onChangeText={(short)=>this.hadleShort(short)}></Dialog.Input>
+                                    <Dialog.Button label="Delete" onPress={this.handleDelete} />
+                                    <Dialog.Button label="Cancel" onPress={this.handleEditCancel} />
+                                    <Dialog.Button label="Edit" onPress={this.handleEditConfirm} />
+                                </Dialog.Container>
+                                <Dialog.Container visible={this.state.showNothingDialog}>
+                                    <Dialog.Title style={{fontSize:24}}>You enter nothing....</Dialog.Title>
+                                    <Dialog.Button label="OK" onPress={this.handleNothingConfirm} />
                                 </Dialog.Container>
                         </View>
                     </View>
-                    <View style={styles.input_wraper}>
+                    <View style={{position: 'absolute', top: 450, left: 0, right: 0}}>
                         <Text style={styles.button_name}>Button Color</Text>
                         <View style={styles.input_shortcut}>
                             {this.props.buttonColor.map((value,idx)=>
@@ -130,20 +174,27 @@ const styles = StyleSheet.create({
         paddingTop:15,
     },
     tempButton:{
-        flex:3,
         flexDirection:"column",
         justifyContent:"flex-start",
-        alignItems:"center"
+        alignItems:"center",
+        position: 'absolute', 
+        top: 100, 
+        left: 0, 
+        right: 0
     },
-    input_wraper:{flex:2},
+    input_wraper:{
+    },
     input_shortcut:{
         flexDirection:"row",
         justifyContent:'center'
     },
     createButton_area:{
-        flex:1,
         justifyContent:"flex-start",
-        alignItems:"center"
+        alignItems:"center",
+        position: 'absolute',
+        top:600,
+        left:0,
+        right:0
     },
     button_name:{
         color: 'white', 
