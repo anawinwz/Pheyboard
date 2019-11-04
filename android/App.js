@@ -41,6 +41,12 @@ class Pheyboard extends Component {
   BindTempButton(returnName){
     this.temp_button.name = returnName;
   }
+  BindMacroKey(returnArr){
+    this.temp_button.Input1 = returnArr[0]
+    this.temp_button.Input2 = returnArr[1]
+    this.temp_button.Input3 = returnArr[2]
+    this.temp_button.Input4 = returnArr[3]
+  }
   delPressHandler = () =>{
     this.setState({isDel: !this.state.isDel, selMem:-1})
   }
@@ -60,7 +66,7 @@ class Pheyboard extends Component {
       } */
       this.props.dispatch({type: 'ADD_BUTTON', idx: this.state.addMem, 
         name: this.temp_button.name,
-        Input1: null, Input2: null, Input3: null, Input4: null,
+        Input1: this.temp_button.Input1, Input2: this.temp_button.Input2, Input3: this.temp_button.Input3, Input4: this.temp_button.Input4,
         color: this.temp_button.color
       })
       console.log("add color = " + this.temp_button.color)
@@ -102,6 +108,7 @@ class Pheyboard extends Component {
         sel = {this.state.selCol}
         crePress={this.BindTempButton.bind(this)}
         bindCol={this.bindCol.bind(this)}
+        arrRtn={this.BindMacroKey.bind(this)}
       />
       <AddPage
         isAdd={this.state.isAdd}
