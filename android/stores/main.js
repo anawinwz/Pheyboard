@@ -40,7 +40,7 @@ function macros(state = DEFAULT_STATE, action) {
       {
         const newState = state
         newState.sets[action.idx].name = action.name
-        return newState
+        return {...newState}
       }
     case 'DELETE_SET':
       {
@@ -50,14 +50,14 @@ function macros(state = DEFAULT_STATE, action) {
           if (newState.sets.length > 0) newState.selectedSet = 0
           else newState.selectedSet = null
         }
-        return newState
+        return {...newState}
       }
     case 'RESET_SET':
       {
         const newState = state
         newState.sets[action.idx].name = `Untitled ${action.idx + 1}`
         newState.sets[action.idx].buttons = [null, null, null, null, null, null, null, null, null, null, null, null]
-        return newState
+        return {...newState}
       }
     case 'ADD_BUTTON':
       {
@@ -67,13 +67,13 @@ function macros(state = DEFAULT_STATE, action) {
           Input1: action.Input1, Input2: action.Input2, Input3: action.Input3, Input4: action.Input4,
           color: action.color
         }
-        return newState
+        return {...newState}
       }
     case 'DELETE_BUTTON':
       {
         const newState = state
         newState.sets[newState.selectedSet].buttons[action.idx] = null
-        return newState
+        return {...newState}
       }
     default:
       return state

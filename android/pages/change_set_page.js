@@ -1,12 +1,31 @@
 import React,{Component} from 'react'
 import {Modal,StyleSheet,Text,View,TouchableHighlight} from 'react-native'
 import ChangeSettingBar from '../components/change_setting_bar'
+import Dialog from 'react-native-dialog'
 
 import { connect } from 'react-redux';
 
 class ChangePage extends Component{
     constructor(props){
         super(props)
+        this.state = {
+            showRenameDialog: false,
+            renameInput: '',
+            renameTarget: null
+        }
+    }
+    toggleRenameDialog(idx) {
+        this.setState({showRenameDialog: !this.state.showRenameDialog, renameInput: this.props.sets[idx].name, renameTarget: idx})
+    }
+    handleRenameCancel() {
+        this.setState({showRenameDialog: false, renameInput: '', renameTarget: null})
+    }
+    handleRenameConfirm() {
+        this.props.dispatch({type: 'RENAME_SET', idx: this.state.renameTarget, name: this.state.renameInput})
+        this.setState({showRenameDialog: false, renameInput: '', renameTarget: null})
+    }
+    handleRenameChange(text) {
+        this.setState({renameInput: text})
     }
     render(){
         return(
@@ -27,6 +46,9 @@ class ChangePage extends Component{
                                     <View style={styles.set_member}>
                                         <View style={[styles.circle,(this.props.sets[this.props.sel] === set && this.props.sel !== -1) ? {backgroundColor : 'dodgerblue'} : {backgroundColor : 'white'} ]}/>
                                         <Text style={styles.set_name}>{set.name}</Text>
+                                        <TouchableHighlight onPress={() => {this.toggleRenameDialog(idx)}}>
+                                            <View style={[styles.circle, styles.rename]}></View>
+                                        </TouchableHighlight>
                                     </View>
                                 </TouchableHighlight>
                             )
@@ -42,6 +64,13 @@ class ChangePage extends Component{
                                 )
                             )}
                     </View>
+                    
+                    <Dialog.Container visible={this.state.showRenameDialog}>
+                        <Dialog.Title>Insert set name</Dialog.Title>
+                        <Dialog.Input value={this.state.renameInput} onChangeText={this.handleRenameChange.bind(this)}></Dialog.Input>
+                        <Dialog.Button label="Cancel" onPress={this.handleRenameCancel.bind(this)} />
+                        <Dialog.Button label="Confirm" onPress={this.handleRenameConfirm.bind(this)} />
+                    </Dialog.Container>
                 </View>
             </Modal>
         )
@@ -70,7 +99,6 @@ const styles = StyleSheet.create({
     },
     set_member:{
         flexDirection:'row',
-        justifyContent:"flex-start",
         alignItems:"center",
         backgroundColor:"grey",
         width:350,     
@@ -80,7 +108,8 @@ const styles = StyleSheet.create({
     },
     set_name:{
         color: 'white', 
-        fontSize:20
+        fontSize:20,
+        width: '60%'
     },
     circle:{
         backgroundColor: 'dodgerblue',
@@ -90,6 +119,10 @@ const styles = StyleSheet.create({
         borderWidth:5,
         borderColor:'white',
         margin: 10
+    },
+    rename: {
+        backgroundColor: 'orange',
+        borderColor: 'orange'
     }
 })
 
