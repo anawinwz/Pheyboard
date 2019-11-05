@@ -50,8 +50,9 @@ while True:
         data = [x.split(' ')[0] for x in data]
         for i in range(4):
             if data[i] == 'null':
+                i-=1
                 break
-        data = data[:i]
+        data = data[:i+1]
         Pressed(data)
         if dot:
             print('.',end='')

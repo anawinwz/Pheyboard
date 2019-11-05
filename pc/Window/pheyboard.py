@@ -50,10 +50,13 @@ while True:
         f.close()
         os.remove('data.txt')
         data = [x.split(' ')[0] for x in data]
+        
         for i in range(4):
             if data[i] == 'null':
+                i-=1;
                 break
-        data = data[:i]
+        data = data[:i+1]
+        print(data)
         Pressed(data)
         if dot:
             print('.',end='')
