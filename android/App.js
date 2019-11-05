@@ -53,17 +53,12 @@ class Pheyboard extends Component {
   delMember = () =>{
     if(this.state.selMem !== -1){
       //set the button to null
-      //MIGRATE REDUX - this.props.buttons[this.state.selMem] = null;
       this.props.dispatch({type: 'DELETE_BUTTON', idx: this.state.selMem})
       this.setState({isDel: !this.state.isDel, selMem:-1})
     }
   }
   addMemberHandler = () =>{
     if(this.state.addMem !== -1 && this.temp_button.name !== '' && this.temp_button.Input1 !== null){
-      /*MIGRATE REDUX -  this.props.buttons[this.state.addMem] = {
-        name: this.temp_button.name,
-        Input1: null, Input2: null, Input3: null, Input4: null
-      } */
       this.props.dispatch({type: 'ADD_BUTTON', idx: this.state.addMem, 
         name: this.temp_button.name,
         Input1: this.temp_button.Input1, Input2: this.temp_button.Input2, Input3: this.temp_button.Input3, Input4: this.temp_button.Input4,
