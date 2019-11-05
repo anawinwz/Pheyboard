@@ -81,5 +81,25 @@ function macros(state = DEFAULT_STATE, action) {
       return state
   }
 }
+const BT_DEFAULT_STATE = {
+  isOn: false,
+  isSup: false,
+  selectedDevice: null,
+  pairedDevices: {}
+}
+function bluetooth(state = BT_DEFAULT_STATE, action) {
+  switch (action.type) {
+    case 'BT_STATE':
+      return {...state, isOn: action.isOn, isSup: action.isSup}
+    case 'BT_PAIRLIST':
+      return {...state, pairedDevices: action.devices}
+    case 'BT_CONNECT':
+      return {...state, selectedDevice: action.mac}
+    case 'BT_DISCONNECT':
+      return {...state, selectedDevice: null}
+    default:
+      return state
+  }
+}
 
-export default combineReducers({ macros })
+export default combineReducers({ macros, bluetooth })

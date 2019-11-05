@@ -45,7 +45,13 @@ export default class SemiCircle extends Component{
                       <Image style={{width:50,height:50}} source={require('../assets/sets.png')}/>
                       <Text style={{fontSize:14, top:5}}>Change</Text>
                     </View>                                                        
-                  </TouchableHighlight>                  
+                  </TouchableHighlight>
+                  <TouchableHighlight onPress={this.props.DevicesPress} underlayColor="grey" style={styles.setting_button}>
+                    <View style={[styles.setting_button,{backgroundColor:'white'}]}>
+                      <Image style={{width:50,height:50}} source={require('../assets/devices.png')}/>
+                      <Text style={{fontSize:14, top:5}}>Devices</Text>
+                    </View>                                                        
+                  </TouchableHighlight>                           
                 </View>}
             </View>
         )
@@ -61,7 +67,7 @@ const styles = StyleSheet.create({
       flexDirection:"row",
       justifyContent:"center",
       alignItems:"center",
-      width:350,
+      width:420,
       height:100,
       borderBottomLeftRadius:200,
       borderTopLeftRadius:200,
