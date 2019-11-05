@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet,Text, View,Button,Alert,TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, NativeModules } from 'react-native';
 
 import SettingBar from './components/setting_bar'
 import {CustomButton} from './components/custom-btn'
@@ -11,7 +11,7 @@ import ChangePage from './pages/change_set_page'
 import { connect } from 'react-redux';
 
 class Pheyboard extends Component {
-  state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1,isChange:false,selCol:-1, ResetTempFromAdd:-1, selSet:0}
+  state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1,isChange:false,selCol:-1, ResetTempFromAdd:-1, selSet:0, btOn: false, btSupport: false, btSelectedDevice: null }
   buttonColor = ['white','#db1d1d','#dbc81d','#3bdb1d','#1d89db']
   temp_button = {name:'',color:'white', Input1: null, Input2: null, Input3: null, Input4: null, color: 'white'}
 
@@ -83,6 +83,27 @@ class Pheyboard extends Component {
   changePressHandler = () =>{
     this.setState({isChange: !this.state.isChange})
   }
+
+  bluetoothChecker = () => {
+    NativeModules.Checker.reCheck()
+    NativeModules.Checker.getStatus((err, isOn, isSup) => {
+      this.setState({isOn: isOn, isSup: isSup})
+      console.log(isOn, isSup)
+    })
+  }
+  bluetoothSendKeystroke = (button) => {
+    console.log(`Trying to send ${button.name}...`)
+    if (this.btSelectedDevice) {
+      NativeModules.BluetoothUtil.sendMessage(`${button.Input1}+${button.Input2}+${button.Input3}+${button.Input4} `)
+    } else {
+      console.log(`No connected device(s)`)
+    }
+  }
+
+  componentDidMount () {
+    setInterval(this.bluetoothChecker, 500)
+  }
+
   render() {
     return (
     <View style={styles.main_container}>
@@ -132,7 +153,7 @@ class Pheyboard extends Component {
         {this.props.buttons.map((button, idx) => <CustomButton
         key={idx} 
         title={(button === null) ? null : button.name}
-        onPress={()=>(button === null) ? null : console.log(` ${button.Input1}+${button.Input2}+${button.Input3}+${button.Input4}`)}
+        onPress={()=>(button === null) ? null : this.bluetoothSendKeystroke(button)}
         style={(button === null) ? {backgroundColor: '#212121'} : {backgroundColor: button.color}}
         textStyle={{}}
         borderStyle={{}}
