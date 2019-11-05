@@ -18,6 +18,30 @@ const DEFAULT_STATE = {
         {name: 'Copy', Input1: 'Ctrl', Input2: 'C', Input3: null, Input4: null, color:'green'}, 
         {name: 'Paste', Input1: 'Ctrl', Input2: 'V', Input3: null, Input4: null, color:'red'}
       ]
+    },
+    {
+      name: `Untitled 3`,
+      buttons: [null, null, null, null, null, null, null, null, null, null, null, null]
+    },
+    {
+      name: `Untitled 4`,
+      buttons: [null, null, null, null, null, null, null, null, null, null, null, null]
+    },
+    {
+      name: `Untitled 5`,
+      buttons: [null, null, null, null, null, null, null, null, null, null, null, null]
+    },
+    {
+      name: `Untitled 6`,
+      buttons: [null, null, null, null, null, null, null, null, null, null, null, null]
+    },
+    {
+      name: `Untitled 7`,
+      buttons: [null, null, null, null, null, null, null, null, null, null, null, null]
+    },
+    {
+      name: `Untitled 8`,
+      buttons: [null, null, null, null, null, null, null, null, null, null, null, null]
     }
   ]
 }
@@ -25,6 +49,7 @@ function macros(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case 'CHANGE_SET':
       return {...state, selectedSet: action.idx}
+    /*
     case 'ADD_SET':
       return {
         ...state,
@@ -36,6 +61,7 @@ function macros(state = DEFAULT_STATE, action) {
           }
         ]
       }
+    */
     case 'RENAME_SET':
       {
         const newState = state

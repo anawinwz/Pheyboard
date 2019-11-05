@@ -16,7 +16,7 @@ export default class SemiCircle extends Component{
               {this.state.collapse ? 
                 <TouchableHighlight onPress={this.checkCollapse} underlayColor="grey" style={styles.circle}>
                   <View style={styles.circle}>
-                    <Image style={{width:50,height:50}} source={require('../assets/option.png')}/>
+                    <Image style={{width:40,height:40}} source={require('../assets/option.png')}/>
                     <Text style={{fontSize:14, top:5}}>Option</Text>
                   </View>
                 </TouchableHighlight> 
@@ -24,31 +24,31 @@ export default class SemiCircle extends Component{
                 <View style={styles.circle_full}>
                   <TouchableHighlight onPress={this.checkCollapse} underlayColor="grey" style={styles.setting_button}>
                     <View style={[styles.setting_button,{backgroundColor:'white'}]}>
-                      <Image style={{width:50,height:50}} source={require('../assets/right.png')}/>
+                      <Image style={{width:40,height:40}} source={require('../assets/right.png')}/>
                       <Text style={{fontSize:14, top:5}}>Back</Text>
                     </View>                    
                   </TouchableHighlight>
                   <TouchableHighlight onPress={this.props.CrePress} underlayColor="grey" style={styles.setting_button}>
                     <View style={[styles.setting_button,{backgroundColor:'white'}]}>
-                      <Image style={{width:50,height:50}} source={require('../assets/add.png')}/>
+                      <Image style={{width:40,height:40}} source={require('../assets/add.png')}/>
                       <Text style={{fontSize:14, top:5}}>Add</Text>
                     </View>                                                        
                   </TouchableHighlight>
                   <TouchableHighlight onPress={this.props.DelPress} underlayColor="grey" style={styles.setting_button}>
                     <View style={[styles.setting_button,{backgroundColor:'white'}]}>
-                      <Image style={{width:50,height:50}} source={require('../assets/delete.png')}/>
+                      <Image style={{width:40,height:40}} source={require('../assets/delete.png')}/>
                       <Text style={{fontSize:14, top:5}}>Delete</Text>
                     </View>                                                        
                   </TouchableHighlight>
                   <TouchableHighlight onPress={this.props.ChangePress} underlayColor="grey" style={styles.setting_button}>
                     <View style={[styles.setting_button,{backgroundColor:'white'}]}>
-                      <Image style={{width:50,height:50}} source={require('../assets/sets.png')}/>
+                      <Image style={{width:40,height:40}} source={require('../assets/sets.png')}/>
                       <Text style={{fontSize:14, top:5}}>Change</Text>
                     </View>                                                        
                   </TouchableHighlight>
                   <TouchableHighlight onPress={this.props.DevicesPress} underlayColor="grey" style={styles.setting_button}>
                     <View style={[styles.setting_button,{backgroundColor:'white'}]}>
-                      <Image style={{width:50,height:50}} source={require('../assets/devices.png')}/>
+                      <Image style={{width:40,height:40}} source={require('../assets/devices.png')}/>
                       <Text style={{fontSize:14, top:5}}>Devices</Text>
                     </View>                                                        
                   </TouchableHighlight>                           
@@ -61,14 +61,14 @@ const size_of_box = 70
 const styles = StyleSheet.create({
     circle_wrapper:{
       flexDirection:"row-reverse",
-      paddingTop: 15
+      paddingTop: 20
     },
     circle_full:{
       flexDirection:"row",
       justifyContent:"center",
       alignItems:"center",
-      width:420,
-      height:100,
+      width:380,
+      height:90,
       borderBottomLeftRadius:200,
       borderTopLeftRadius:200,
       backgroundColor:"white"
@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
     circle:{
       justifyContent:"center",
       alignItems:"center",
-      width:120,
-      height:100,
+      width:100,
+      height:90,
       borderBottomLeftRadius:200,
       borderTopLeftRadius:200,
       backgroundColor:"white"
@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
       width:size_of_box,     
       height:size_of_box,    
       borderRadius:10,// change how round the box
-      display: "flex",
-      margin: 5         
+      display: "flex",      
     },
   })
