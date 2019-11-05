@@ -1,1 +1,0 @@
-run shell cmd source env/Scripts/Activate
