@@ -59,7 +59,7 @@ class Pheyboard extends Component {
     }
   }
   addMemberHandler = () =>{
-    if(this.state.addMem !== -1 && this.temp_button.name !== ''){
+    if(this.state.addMem !== -1 && this.temp_button.name !== '' && this.temp_button.Input1 !== null){
       /*MIGRATE REDUX -  this.props.buttons[this.state.addMem] = {
         name: this.temp_button.name,
         Input1: null, Input2: null, Input3: null, Input4: null
