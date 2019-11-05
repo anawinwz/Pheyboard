@@ -103,7 +103,7 @@ export default class CreatePage extends Component{
                 <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
                     <View style ={styles.modals_create}>
                         <View style={styles.create_wrapper}>
-                            <BackButton onClick={this.backHandler} style={{width:100,height:75}}/>                        
+                            <BackButton onClick={this.backHandler} style={{width:100,height:90}}/>                        
                         </View>
                         <View style={styles.tempButton}>
                             <View style={[styles.preview,(this.props.sel !== -1)?{backgroundColor:this.buttonColor[this.props.sel]}:null]}>
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     create_wrapper:{
         flex:1,
         flexDirection:"row",
-        paddingTop:15,
+        paddingTop:20,
     },
     tempButton:{
         flexDirection:"column",
