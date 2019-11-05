@@ -7,9 +7,14 @@ export const CustomButton = (props) => {
 
     return (
         <View style={borderStyle}>
-            <TouchableOpacity onPress={onPress} style={[styles.button, style]} disable = {props.disable}>
-                <Text style={[styles.text, textStyle]}>{props.title}</Text>
-            </TouchableOpacity>            
+            {(props.title !== null && props.title !== '') ? 
+                <TouchableOpacity onPress={onPress} style={[styles.button, style]} disable = {props.disable}>
+                    <Text style={[styles.text, textStyle]}>{props.title}</Text>
+                </TouchableOpacity>:
+                <View
+                    style={[styles.button,style]} 
+                />
+            }            
         </View>
     );
 };
@@ -26,6 +31,7 @@ const styles = StyleSheet.create({
         margin: 10
     },
     text: {
-        fontSize: 20
+        fontSize: 20,
+        textAlign: "center"
     },
 });
