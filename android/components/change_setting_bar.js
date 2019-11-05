@@ -31,13 +31,13 @@ export default class ChangeElements extends Component{
                 <TouchableHighlight underlayColor="white" style={styles.circle_left} onPress ={this.toggleResetDialog.bind(this)}>
                     <View style={styles.button_content}>
                         <Image style={{width:65,height:50}} source={require('../assets/reset.png')}/>
-                        <Text style={{fontSize:10, top:5}}>Reset selected set</Text>
+                        <Text style={{fontSize:14, top:5}}>Reset Set</Text>
                     </View>
                 </TouchableHighlight>
                 <Dialog.Container visible={this.state.showResetDialog}>
                     <Dialog.Title style={{fontSize:24}}>Warning</Dialog.Title>
                     <Dialog.Description>
-                        "Reset Selected Set" will remove all buttons in this set and rename their set to default name.{"\n\n"}
+                        "Reset Set" will remove all buttons in the current selected set and rename this set to default name.{"\n\n"}
                         Do you want to reset "{this.props.selectedSet}" set?
                     </Dialog.Description>
                     <Dialog.Button label="No" onPress={this.handleResetCancel.bind(this)} />
