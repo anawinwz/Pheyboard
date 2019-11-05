@@ -21,7 +21,8 @@ class DevicesPage extends Component{
     }
     selectDevice = (mac) => {
       if (!this.props.bluetooth.isOn || !this.props.bluetooth.isSup) return;
-
+      if (this.props.bluetooth.selectedDevice && this.props.selectDevice === mac) return;
+      
       if (this.props.bluetooth.selectedDevice) {
         NativeModules.BluetoothUtil.disconnectDevice(this.props.bluetooth.selectedDevice);
       }
