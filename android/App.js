@@ -137,7 +137,7 @@ class Pheyboard extends Component {
         {this.props.buttons.map((button, idx) => <CustomButton
         key={idx} 
         title={(button === null) ? null : button.name}
-        onPress={()=>(button === null) ? null : Alert.alert(`${button.name} -  ${button.Input1}+${button.Input2}+${button.Input3}+${button.Input4}`)}
+        onPress={()=>(button === null) ? null : console.log(` ${button.Input1}+${button.Input2}+${button.Input3}+${button.Input4}`)}
         style={(button === null) ? {backgroundColor: '#212121'} : {backgroundColor: button.color}}
         textStyle={{}}
         borderStyle={{}}
