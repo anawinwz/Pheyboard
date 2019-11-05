@@ -2,7 +2,7 @@ import schedule
 import time
 import os
 
-FILE_PATH = "./data.txt"
+FILE_PATH = "./Window/data.txt"
 INCOME_PATH = "./incoming.txt"
 cmds = []
 
