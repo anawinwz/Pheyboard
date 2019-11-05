@@ -73,7 +73,7 @@ public class BluetoothUtil extends ReactContextBaseJavaModule  {
         deviceInterface.setListeners(this::onMessageReceived, this::onMessageSent, this::onError);
 
         // Let's send a message:
-        deviceInterface.sendMessage("Hello world!");
+        // deviceInterface.sendMessage("Hello world!");
     }
     @ReactMethod
     public void sendMessage(String message) {
@@ -84,7 +84,8 @@ public class BluetoothUtil extends ReactContextBaseJavaModule  {
 
     private void onMessageSent(String message) {
         // We sent a message! Handle it here.
-        Toast.makeText(getReactApplicationContext(), "Sent a message! Message was: " + message, Toast.LENGTH_LONG).show(); // Replace context with your context instance.
+        // Toast.makeText(getReactApplicationContext(), "Sent a message! Message was: " + message, Toast.LENGTH_LONG).show(); // Replace context with your context instance.
+        Toast.makeText(getReactApplicationContext(), "Sent a macro! ", Toast.LENGTH_LONG).show();
     }
 
     private void onMessageReceived(String message) {
