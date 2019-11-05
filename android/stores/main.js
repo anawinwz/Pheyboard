@@ -4,20 +4,12 @@ const DEFAULT_STATE = {
   selectedSet: 0,
   sets: [
     {
-      name: `Sample Shortcut`,
-      buttons: [
-        {name: 'Copy', Input1: 'Ctrl', Input2: 'C', Input3: null, Input4: null, color:'white'}, 
-        {name: 'Paste', Input1: 'Ctrl', Input2: 'V', Input3: null, Input4: null, color:'white'},
-        null, null, null, null, null, null, null, null, null, null
-      ]
+      name: `Untitled 1`,
+      buttons: [null, null, null, null, null, null, null, null, null, null, null, null]
     },
     {
-      name: `Sample Shortcut 2`,
-      buttons: [
-        null, null, null, null, null, null, null, null, null, null,
-        {name: 'Copy', Input1: 'Ctrl', Input2: 'C', Input3: null, Input4: null, color:'green'}, 
-        {name: 'Paste', Input1: 'Ctrl', Input2: 'V', Input3: null, Input4: null, color:'red'}
-      ]
+      name: `Untitled 2`,
+      buttons: [null, null, null, null, null, null, null, null, null, null, null, null]
     },
     {
       name: `Untitled 3`,

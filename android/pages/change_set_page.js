@@ -55,16 +55,6 @@ class ChangePage extends Component{
                                 </TouchableHighlight>
                             )
                         )}
-                        {this.props.sets.length < 8 && 
-                        [...Array(8-this.props.sets.length).keys()].map((idx) => (
-                                <TouchableHighlight underlayColor="white" style={styles.set_member} key={idx}
-                                onPress={() => this.props.dispatch({type: 'ADD_SET' })}>
-                                    <View style={styles.set_member}>
-                                        <Text style={[styles.set_name,{marginLeft:10}]}>+ ADD NEW SET</Text>
-                                    </View>
-                                </TouchableHighlight>
-                                )
-                            )}
                     </View>
                     
                     <Dialog.Container visible={this.state.showRenameDialog}>
