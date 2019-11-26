@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet,Text, View,Button,Alert,TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, NativeModules } from 'react-native';
 
 import SettingBar from './components/setting_bar'
 import {CustomButton} from './components/custom-btn'
@@ -7,11 +7,12 @@ import DeletePage from './pages/delete_btn_page'
 import CreatePage from './pages/create_btn_page'
 import AddPage from './pages/add_btn_page'
 import ChangePage from './pages/change_set_page'
+import DevicesPage from './pages/devices_page'
 
 import { connect } from 'react-redux';
 
 class Pheyboard extends Component {
-  state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1,isChange:false,selCol:-1, ResetTempFromAdd:-1, selSet:0}
+  state  = {int:0, isDel:false, selMem:-1, isCre:false, isAdd:false,addMem:-1,isChange:false,selCol:-1, ResetTempFromAdd:-1, selSet:0, isDevices: false }
   buttonColor = ['white','#db1d1d','#dbc81d','#3bdb1d','#1d89db']
   temp_button = {name:'',color:'white', Input1: null, Input2: null, Input3: null, Input4: null, color: 'white'}
 
@@ -53,17 +54,12 @@ class Pheyboard extends Component {
   delMember = () =>{
     if(this.state.selMem !== -1){
       //set the button to null
-      //MIGRATE REDUX - this.props.buttons[this.state.selMem] = null;
       this.props.dispatch({type: 'DELETE_BUTTON', idx: this.state.selMem})
       this.setState({isDel: !this.state.isDel, selMem:-1})
     }
   }
   addMemberHandler = () =>{
-    if(this.state.addMem !== -1 && this.temp_button.name !== ''){
-      /*MIGRATE REDUX -  this.props.buttons[this.state.addMem] = {
-        name: this.temp_button.name,
-        Input1: null, Input2: null, Input3: null, Input4: null
-      } */
+    if(this.state.addMem !== -1 && this.temp_button.name !== '' && this.temp_button.Input1 !== null){
       this.props.dispatch({type: 'ADD_BUTTON', idx: this.state.addMem, 
         name: this.temp_button.name,
         Input1: this.temp_button.Input1, Input2: this.temp_button.Input2, Input3: this.temp_button.Input3, Input4: this.temp_button.Input4,
@@ -88,6 +84,30 @@ class Pheyboard extends Component {
   changePressHandler = () =>{
     this.setState({isChange: !this.state.isChange})
   }
+  devicesPressHandler = () =>{
+    this.setState({isDevices: !this.state.isDevices})
+  }
+
+  bluetoothChecker = () => {
+    NativeModules.Checker.reCheck()
+    NativeModules.Checker.getStatus((err, isOn, isSup) => {
+      this.props.dispatch({type: 'BT_STATE', isOn: isOn, isSup: isSup})
+      console.log(isOn, isSup)
+    })
+  }
+  bluetoothSendKeystroke = (button) => {
+    console.log(`Trying to send ${button.name}...`)
+    if (this.props.bluetooth.selectedDevice) {
+      NativeModules.BluetoothUtil.sendMessage(`${button.Input1}+${button.Input2}+${button.Input3}+${button.Input4} `)
+    } else {
+      console.log(`No connected device(s)`)
+    }
+  }
+
+  componentDidMount () {
+    setInterval(this.bluetoothChecker, 500)
+  }
+
   render() {
     return (
     <View style={styles.main_container}>
@@ -125,11 +145,16 @@ class Pheyboard extends Component {
         btnPress={this.SelectSet.bind(this)}
         sel={this.state.selSet}
       />
+      <DevicesPage
+        isDevices={this.state.isDevices}
+        onPress={this.devicesPressHandler}
+      />
       <View style={styles.setting_container}>
         <SettingBar 
           CrePress={this.createPressHandler} 
           DelPress={this.delPressHandler} 
           ChangePress={this.changePressHandler}
+          DevicesPress={this.devicesPressHandler}
         />      
       </View>
       <Text style={styles.pad_name}>{this.props.headerText}</Text>
@@ -137,7 +162,7 @@ class Pheyboard extends Component {
         {this.props.buttons.map((button, idx) => <CustomButton
         key={idx} 
         title={(button === null) ? null : button.name}
-        onPress={()=>(button === null) ? null : Alert.alert(`${button.name} - ${button.Input1}+${button.Input2}+${button.Input3}+${button.Input4}`)}
+        onPress={()=>(button === null) ? null : this.bluetoothSendKeystroke(button)}
         style={(button === null) ? {backgroundColor: '#212121'} : {backgroundColor: button.color}}
         textStyle={{}}
         borderStyle={{}}
@@ -169,7 +194,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = function(state) {
   return {
     buttons: state.macros.sets[state.macros.selectedSet].buttons,
-    headerText: state.macros.sets[state.macros.selectedSet].name
+    headerText: state.macros.sets[state.macros.selectedSet].name,
+    bluetooth: state.bluetooth
   }
 }
 export default connect(mapStateToProps)(Pheyboard);

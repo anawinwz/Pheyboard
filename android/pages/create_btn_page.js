@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import {TouchableHighlight,Image,Modal,StyleSheet,Text,TextInput,View} from 'react-native'
+import {TouchableWithoutFeedback,TouchableHighlight,Keyboard,Modal,StyleSheet,Text,TextInput,View,Alert} from 'react-native'
 import {InputMacro} from '../components/input-macro-btn'
 import {BackButton} from '../components/back_button'
 import {CustomCircle} from '../components/custom-circle'
@@ -28,14 +28,21 @@ export default class CreatePage extends Component{
         this.props.onPress()
     }
     BindTempButton = ()=>{
-        this.props.onAdd()
-        this.props.crePress(this.state.tempName)
-        this.props.arrRtn(this.buttonShortCut)
-        this.props.bindCol(this.props.sel)
-        //reset local state
-        this.setState({tempName:""})
-        this.setState({addBtnState:0})
-        this.buttonShortCut=[null,null,null,null]
+        if(this.state.addBtnState > 0)
+        {
+            this.props.onAdd()
+            this.props.crePress(this.state.tempName)
+            this.props.arrRtn(this.buttonShortCut)
+            this.props.bindCol(this.props.sel)
+            //reset local state
+            this.setState({tempName:""})
+            this.setState({addBtnState:0})
+            this.buttonShortCut=[null,null,null,null]
+        }
+        else
+        {
+            this.handleNothingConfirm()
+        }
     }
     toogleAddDialog = () =>{
         this.setState({showAddDialog:!this.state.showAddDialog})
@@ -63,8 +70,8 @@ export default class CreatePage extends Component{
             this.tempBtn = ''
             this.setState({showAddDialog:!this.state.showAddDialog,addBtnState:this.state.addBtnState + 1})
         }else{
-            /*Alert.alert('You enter nothing....')*/
-            this.setState({showAddDialog:!this.state.showAddDialog,showNothingDialog:!this.state.showNothingDialog})
+            Alert.alert('You enter nothing....')
+            this.setState({showAddDialog:!this.state.showAddDialog})
         }
     }
     handleEditCancel= ()=>{
@@ -76,7 +83,8 @@ export default class CreatePage extends Component{
             this.tempBtn = ''
             this.setState({showEditDialog:!this.state.showEditDialog})
         }else{
-            this.setState({showEditDialog:!this.state.showEditDialog,showNothingDialog:!this.state.showNothingDialog})
+            Alert.alert('You enter nothing....')
+            this.setState({showEditDialog:!this.state.showEditDialog})
         }
     }
     handleNothingConfirm = () => {
@@ -92,72 +100,75 @@ export default class CreatePage extends Component{
                     transparent={false}
                     visible = {this.props.isCre}
             >
-                <View style ={styles.modals_create}>
-                    <View style={styles.create_wrapper}>
-                        <BackButton onClick={this.backHandler} style={{width:100,height:75}}/>                        
-                    </View>
-                    <View style={styles.tempButton}>
-                        <View style={[styles.preview,(this.props.sel !== -1)?{backgroundColor:this.buttonColor[this.props.sel]}:null]}>
-                            <Text>{this.state.tempName}</Text>
+                <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+                    <View style ={styles.modals_create}>
+                        <View style={styles.create_wrapper}>
+                            <BackButton onClick={this.backHandler} style={{width:100,height:90}}/>                        
                         </View>
-                        <Text style={styles.button_name}>Button Name</Text>
-                        <TextInput
-                            style={styles.name_input_box}
-                            onChangeText={(tempName) => this.setState({tempName})}
-                            value={this.state.tempName}
-                            maxLength={24}
-                        />
-                    </View>
-                    <View style={{position: 'absolute', top: 310, left: 0, right: 0}}>
-                        <Text style={styles.button_name}>Button Input</Text>
-                        <View style={styles.input_shortcut}>
-                        {this.buttonShortCut.map((val,idx)=>
-                                <InputMacro
-                                    state = {this.state.addBtnState}
-                                    pos={idx}
-                                    key={idx}
-                                    keyMacro={val}
-                                    onPress={this.toogleAddDialog}
-                                    EditPress={this.toogleEditDialog}
-                                />                            
-                            )}
-                                <Dialog.Container visible={this.state.showAddDialog}>
-                                    <Dialog.Title style={{fontSize:24}}>Insert Macro Input</Dialog.Title>
-                                    <Dialog.Input style={{fontSize:18}} placeholder="Type input here!" onChangeText={(short)=>this.hadleShort(short)}></Dialog.Input>
-                                    <Dialog.Button label="Cancel" onPress={this.handleAddCancel} />
-                                    <Dialog.Button label="Add" onPress={this.handleAddConfirm} />
-                                </Dialog.Container>
-                                <Dialog.Container visible={this.state.showEditDialog}>
-                                    <Dialog.Title style={{fontSize:24}}>Edit Macro Input</Dialog.Title>
-                                    <Dialog.Input style={{fontSize:18}} placeholder="Type input here!" onChangeText={(short)=>this.hadleShort(short)}></Dialog.Input>
-                                    <Dialog.Button label="Delete" onPress={this.handleDelete} />
-                                    <Dialog.Button label="Cancel" onPress={this.handleEditCancel} />
-                                    <Dialog.Button label="Edit" onPress={this.handleEditConfirm} />
-                                </Dialog.Container>
-                                <Dialog.Container visible={this.state.showNothingDialog}>
-                                    <Dialog.Title style={{fontSize:24}}>You enter nothing....</Dialog.Title>
-                                    <Dialog.Button label="OK" onPress={this.handleNothingConfirm} />
-                                </Dialog.Container>
+                        <View style={styles.tempButton}>
+                            <View style={[styles.preview,(this.props.sel !== -1)?{backgroundColor:this.buttonColor[this.props.sel]}:null]}>
+                                <Text style={{fontSize:20}}>{this.state.tempName}</Text>
+                            </View>
+                            <Text style={styles.button_name}>Button Name</Text>
+                            <TextInput
+                                style={styles.name_input_box}
+                                onChangeText={(tempName) => this.setState({tempName})}
+                                value={this.state.tempName}
+                                maxLength={24}
+                            />
+                        </View>
+                        <View style={{position: 'absolute', top: 320, left: 0, right: 0}}>
+                            <Text style={styles.button_name}>Button Input</Text>
+                            <View style={styles.input_shortcut}>
+                            {this.buttonShortCut.map((val,idx)=>
+                                    <InputMacro
+                                        state = {this.state.addBtnState}
+                                        pos={idx}
+                                        key={idx}
+                                        keyMacro={val}
+                                        onPress={this.toogleAddDialog}
+                                        EditPress={this.toogleEditDialog}
+                                    />                            
+                                )}
+                                    <Dialog.Container visible={this.state.showAddDialog}>
+                                        <Dialog.Title style={{fontSize:24}}>Insert Macro Input</Dialog.Title>
+                                        <Dialog.Input style={{fontSize:18}} placeholder="Type input here!" onChangeText={(short)=>this.hadleShort(short)}></Dialog.Input>
+                                        <Dialog.Button label="Cancel" onPress={this.handleAddCancel} />
+                                        <Dialog.Button label="Add" onPress={this.handleAddConfirm} />
+                                    </Dialog.Container>
+                                    <Dialog.Container visible={this.state.showEditDialog}>
+                                        <Dialog.Title style={{fontSize:24}}>Edit Macro Input</Dialog.Title>
+                                        <Dialog.Input style={{fontSize:18}} placeholder="Type input here!" onChangeText={(short)=>this.hadleShort(short)}></Dialog.Input>
+                                        <Dialog.Button label="Delete" onPress={this.handleDelete} />
+                                        <Dialog.Button label="Cancel" onPress={this.handleEditCancel} />
+                                        <Dialog.Button label="Edit" onPress={this.handleEditConfirm} />
+                                    </Dialog.Container>
+                                    <Dialog.Container visible={this.state.showNothingDialog}>
+                                        <Dialog.Title style={{fontSize:24}}>Can't Create Button</Dialog.Title>
+                                        <Dialog.Description>Required at least 1 Button Input to Create Button</Dialog.Description>
+                                        <Dialog.Button label="OK" onPress={this.handleNothingConfirm} />
+                                    </Dialog.Container>
+                            </View>
+                        </View>
+                        <View style={{position: 'absolute', top: 455, left: 0, right: 0}}>
+                            <Text style={styles.button_name}>Button Color</Text>
+                            <View style={styles.input_shortcut}>
+                                {this.props.buttonColor.map((value,idx)=>
+                                    <CustomCircle
+                                        key={idx}
+                                        style={{width:50,height:50,borderRadius:25,backgroundColor:value,borderWidth:5,borderColor:'#151515'}}
+                                        onPress={()=>this.props.btnPress(idx)}
+                                        borderStyle={(this.props.buttonColor[this.props.sel] === value && this.props.sel !== -1) ? styles.color_select : null}
+                                    />)}
+                            </View>
+                        </View>
+                        <View style={styles.createButton_area}>
+                            <TouchableHighlight underlayColor="white" style={styles.createButton} onPress={this.BindTempButton}>
+                                <Text style={styles.button_name}>Create Button</Text>
+                            </TouchableHighlight>
                         </View>
                     </View>
-                    <View style={{position: 'absolute', top: 450, left: 0, right: 0}}>
-                        <Text style={styles.button_name}>Button Color</Text>
-                        <View style={styles.input_shortcut}>
-                            {this.props.buttonColor.map((value,idx)=>
-                                <CustomCircle
-                                    key={idx}
-                                    style={{width:50,height:50,borderRadius:25,backgroundColor:value,borderWidth:5,borderColor:'#151515'}}
-                                    onPress={()=>this.props.btnPress(idx)}
-                                    borderStyle={(this.props.buttonColor[this.props.sel] === value && this.props.sel !== -1) ? styles.color_select : null}
-                                />)}
-                        </View>
-                    </View>
-                    <View style={styles.createButton_area}>
-                        <TouchableHighlight underlayColor="white" style={styles.createButton} onPress={this.BindTempButton}>
-                            <Text style={styles.button_name}>Create Button</Text>
-                        </TouchableHighlight>
-                    </View>
-                </View>
+                </TouchableWithoutFeedback>
             </Modal>
         )
     }
@@ -171,7 +182,7 @@ const styles = StyleSheet.create({
     create_wrapper:{
         flex:1,
         flexDirection:"row",
-        paddingTop:15,
+        paddingTop:20,
     },
     tempButton:{
         flexDirection:"column",
@@ -225,11 +236,12 @@ const styles = StyleSheet.create({
     preview:{
         justifyContent:"center",
         alignItems:"center",
-        width:90,     
-        height:90,    
+        width:100,     
+        height:100,    
         borderRadius:10,// change how round the box
         backgroundColor:'white',
         display: "flex",
+        padding: 10,
         margin: 10
     },
     color_select:{

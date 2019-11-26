@@ -47,7 +47,6 @@ const styles = StyleSheet.create({
     head_text:{color: 'white', fontSize:36, textAlign: 'center'},
     del_pad_container:{
         flex:4,
-        paddingLeft:10,
         flexDirection: 'row', 
         justifyContent: 'center',
         flexWrap: 'wrap',
