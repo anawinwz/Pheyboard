@@ -29,8 +29,10 @@ Installing application on your phone from `https://bit.ly/2OoZiwR`
 
 ---Linus OS---
 1. Run these command in terminal
-   1.1 rfcomm (to connect bluetooth)
-   1.2 miniterm (to receive data)
+   - rfcomm (to connect bluetooth)
+      > __$__ rfcomm listen -i rfcom0
+   - miniterm (to receive data and append it in filename.txt) or change filename.txt to your text file name
+      > __$__ miniterm /dev/rfcom >> ./filename.txt
 2. Run virtual environment activate script in folder pc/Window using window's command prompt "activate.bat"
 3. Run parser.py in folder pc
 4. Run pheyboard.py in folder pc/Window
