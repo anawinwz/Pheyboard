@@ -19,6 +19,21 @@ This project is for "01204341 Software Engineer" class in Bachelor of Engineerin
 ### Application on mobile phone
 Installing application on your phone from `https://bit.ly/2OoZiwR`
 ### Program on PC
+---Window OS---
+1. Open linux virtual machine to run these command in terminal
+   1.1 rfcomm (to connect bluetooth)
+   1.2 miniterm (to receive data)
+2. Run virtual environment activate script in folder pc/Window using window's command prompt "activate.bat"
+3. Run parser.py in folder pc
+4. Run pheyboard.py in folder pc/Window
+
+---Linus OS---
+1. Run these command in terminal
+   1.1 rfcomm (to connect bluetooth)
+   1.2 miniterm (to receive data)
+2. Run virtual environment activate script in folder pc/Window using window's command prompt "activate.bat"
+3. Run parser.py in folder pc
+4. Run pheyboard.py in folder pc/Window
 
 ### Clone
 Clone this repo to your local machine using `https://github.com/anawinwz/Pheyboard.git`
