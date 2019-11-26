@@ -17,7 +17,7 @@ This project is for "01204341 Software Engineer" class in Bachelor of Engineerin
 - Android Phone
 - Linux on PC
 ### Application on mobile phone
-Installing application on your phone from `https://bit.ly/33g1lr6`
+Installing application on your phone from `https://bit.ly/2OoZiwR`
 ### Program on PC
 
 ### Clone
