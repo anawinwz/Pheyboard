@@ -30,7 +30,7 @@ Installing application on your phone from `https://bit.ly/2OoZiwR`
 3. Run parser.py in folder pc
 4. Run pheyboard.py in folder pc/Window
 
----Linus OS---
+---Linux OS---
 1. Run these command in terminal
    - rfcomm (to connect bluetooth)
       > __$__ rfcomm listen -i rfcom0
