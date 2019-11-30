@@ -13,12 +13,15 @@ This project is for "01204341 Software Engineer" class in Bachelor of Engineerin
 | 6010504678 | Chanawat Lohachala |
 
 ## Installation
+
 ### Requirement
-- Android Phone
-- Linux on PC
+- Android OS on mobile phone
+- Linux OS or Window OS on PC
+
 ### Application on mobile phone
 Installing application on your phone from `https://bit.ly/2OoZiwR`
-### Program on PC
+
+### Software on PC
 ---Window OS---
 1. Open linux virtual machine to run these command in terminal
    1.1 rfcomm (to connect bluetooth)
